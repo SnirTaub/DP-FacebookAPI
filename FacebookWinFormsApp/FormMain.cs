@@ -76,21 +76,21 @@ namespace BasicFacebookFeatures
 
         private void fetchUserInfo()
         {
-            pictureBoxProfile.LoadAsync(m_LoggedInUser.PictureNormalURL);
             textboxEmail.Text = m_LoggedInUser?.Email;
             textboxBirthday.Text = m_LoggedInUser?.Birthday;
             textboxCity.Text = m_LoggedInUser.Location?.Name;
-            selectedPagesLikesBox.Visible = true;
+            /*selectedPagesLikesBox.Visible = true;
             selectedPostBox.Visible = true;
             fetchAlbums();
             fetchLikes();
             fetchPosts();
-            fetchEvents();
+            fetchEvents();*/
         }
 
         private void fetchAlbums()
         {
 
         }
+
     }
 }

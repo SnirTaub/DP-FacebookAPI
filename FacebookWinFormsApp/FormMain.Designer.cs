@@ -36,6 +36,9 @@
             this.pictureBoxProfile = new System.Windows.Forms.PictureBox();
             this.textBoxAppID = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.textboxEmail = new System.Windows.Forms.TextBox();
+            this.textboxBirthday = new System.Windows.Forms.TextBox();
+            this.textboxCity = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
@@ -88,6 +91,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.textboxCity);
+            this.tabPage1.Controls.Add(this.textboxBirthday);
+            this.tabPage1.Controls.Add(this.textboxEmail);
             this.tabPage1.Controls.Add(this.pictureBoxProfile);
             this.tabPage1.Controls.Add(this.textBoxAppID);
             this.tabPage1.Controls.Add(this.label1);
@@ -128,6 +134,27 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // textboxEmail
+            // 
+            this.textboxEmail.Location = new System.Drawing.Point(186, 195);
+            this.textboxEmail.Name = "textboxEmail";
+            this.textboxEmail.Size = new System.Drawing.Size(100, 24);
+            this.textboxEmail.TabIndex = 56;
+            // 
+            // textboxBirthday
+            // 
+            this.textboxBirthday.Location = new System.Drawing.Point(186, 225);
+            this.textboxBirthday.Name = "textboxBirthday";
+            this.textboxBirthday.Size = new System.Drawing.Size(100, 24);
+            this.textboxBirthday.TabIndex = 57;
+            // 
+            // textboxCity
+            // 
+            this.textboxCity.Location = new System.Drawing.Point(186, 255);
+            this.textboxCity.Name = "textboxCity";
+            this.textboxCity.Size = new System.Drawing.Size(100, 24);
+            this.textboxCity.TabIndex = 58;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -157,6 +184,9 @@
 		private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox textBoxAppID;
         private System.Windows.Forms.PictureBox pictureBoxProfile;
+        private System.Windows.Forms.TextBox textboxEmail;
+        private System.Windows.Forms.TextBox textboxBirthday;
+        private System.Windows.Forms.TextBox textboxCity;
     }
 }
 
