@@ -87,5 +87,10 @@ namespace BasicFacebookFeatures
             fetchPosts();
             fetchEvents();
         }
+
+        private void fetchAlbums()
+        {
+
+        }
     }
 }
