@@ -33,9 +33,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.textBoxBirthday = new System.Windows.Forms.TextBox();
+            this.textBoxEmail = new System.Windows.Forms.TextBox();
+            this.labelMyBirthday = new System.Windows.Forms.Label();
+            this.labelMyCity = new System.Windows.Forms.Label();
+            this.labelMyEmail = new System.Windows.Forms.Label();
             this.pictureBoxProfile = new System.Windows.Forms.PictureBox();
             this.textBoxAppID = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.textBoxCity = new System.Windows.Forms.TextBox();
+            this.labelPosts = new System.Windows.Forms.Label();
+            this.labelAlbums = new System.Windows.Forms.Label();
+            this.listBoxPosts = new System.Windows.Forms.ListBox();
+            this.listBoxAlbums = new System.Windows.Forms.ListBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
@@ -88,6 +98,16 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.listBoxAlbums);
+            this.tabPage1.Controls.Add(this.listBoxPosts);
+            this.tabPage1.Controls.Add(this.labelAlbums);
+            this.tabPage1.Controls.Add(this.labelPosts);
+            this.tabPage1.Controls.Add(this.textBoxCity);
+            this.tabPage1.Controls.Add(this.textBoxBirthday);
+            this.tabPage1.Controls.Add(this.textBoxEmail);
+            this.tabPage1.Controls.Add(this.labelMyBirthday);
+            this.tabPage1.Controls.Add(this.labelMyCity);
+            this.tabPage1.Controls.Add(this.labelMyEmail);
             this.tabPage1.Controls.Add(this.pictureBoxProfile);
             this.tabPage1.Controls.Add(this.textBoxAppID);
             this.tabPage1.Controls.Add(this.label1);
@@ -100,6 +120,47 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // textBoxBirthday
+            // 
+            this.textBoxBirthday.Location = new System.Drawing.Point(1052, 54);
+            this.textBoxBirthday.Name = "textBoxBirthday";
+            this.textBoxBirthday.Size = new System.Drawing.Size(159, 24);
+            this.textBoxBirthday.TabIndex = 61;
+            // 
+            // textBoxEmail
+            // 
+            this.textBoxEmail.Location = new System.Drawing.Point(1052, 14);
+            this.textBoxEmail.Name = "textBoxEmail";
+            this.textBoxEmail.Size = new System.Drawing.Size(159, 24);
+            this.textBoxEmail.TabIndex = 59;
+            // 
+            // labelMyBirthday
+            // 
+            this.labelMyBirthday.AutoSize = true;
+            this.labelMyBirthday.Location = new System.Drawing.Point(974, 57);
+            this.labelMyBirthday.Name = "labelMyBirthday";
+            this.labelMyBirthday.Size = new System.Drawing.Size(65, 18);
+            this.labelMyBirthday.TabIndex = 58;
+            this.labelMyBirthday.Text = "Birthday:";
+            // 
+            // labelMyCity
+            // 
+            this.labelMyCity.AutoSize = true;
+            this.labelMyCity.Location = new System.Drawing.Point(974, 96);
+            this.labelMyCity.Name = "labelMyCity";
+            this.labelMyCity.Size = new System.Drawing.Size(37, 18);
+            this.labelMyCity.TabIndex = 57;
+            this.labelMyCity.Text = "City:";
+            // 
+            // labelMyEmail
+            // 
+            this.labelMyEmail.AutoSize = true;
+            this.labelMyEmail.Location = new System.Drawing.Point(974, 17);
+            this.labelMyEmail.Name = "labelMyEmail";
+            this.labelMyEmail.Size = new System.Drawing.Size(49, 18);
+            this.labelMyEmail.TabIndex = 56;
+            this.labelMyEmail.Text = "Email:";
             // 
             // pictureBoxProfile
             // 
@@ -127,6 +188,49 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // textBoxCity
+            // 
+            this.textBoxCity.Location = new System.Drawing.Point(1052, 96);
+            this.textBoxCity.Name = "textBoxCity";
+            this.textBoxCity.Size = new System.Drawing.Size(159, 24);
+            this.textBoxCity.TabIndex = 62;
+            // 
+            // labelPosts
+            // 
+            this.labelPosts.AutoSize = true;
+            this.labelPosts.Location = new System.Drawing.Point(18, 203);
+            this.labelPosts.Name = "labelPosts";
+            this.labelPosts.Size = new System.Drawing.Size(75, 18);
+            this.labelPosts.TabIndex = 63;
+            this.labelPosts.Text = "My Posts:";
+            // 
+            // labelAlbums
+            // 
+            this.labelAlbums.AutoSize = true;
+            this.labelAlbums.Location = new System.Drawing.Point(18, 429);
+            this.labelAlbums.Name = "labelAlbums";
+            this.labelAlbums.Size = new System.Drawing.Size(85, 18);
+            this.labelAlbums.TabIndex = 64;
+            this.labelAlbums.Text = "My Albums:";
+            // 
+            // listBoxPosts
+            // 
+            this.listBoxPosts.FormattingEnabled = true;
+            this.listBoxPosts.ItemHeight = 18;
+            this.listBoxPosts.Location = new System.Drawing.Point(21, 242);
+            this.listBoxPosts.Name = "listBoxPosts";
+            this.listBoxPosts.Size = new System.Drawing.Size(171, 148);
+            this.listBoxPosts.TabIndex = 65;
+            // 
+            // listBoxAlbums
+            // 
+            this.listBoxAlbums.FormattingEnabled = true;
+            this.listBoxAlbums.ItemHeight = 18;
+            this.listBoxAlbums.Location = new System.Drawing.Point(21, 475);
+            this.listBoxAlbums.Name = "listBoxAlbums";
+            this.listBoxAlbums.Size = new System.Drawing.Size(171, 148);
+            this.listBoxAlbums.TabIndex = 66;
             // 
             // FormMain
             // 
@@ -157,6 +261,16 @@
 		private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox textBoxAppID;
         private System.Windows.Forms.PictureBox pictureBoxProfile;
+        private System.Windows.Forms.TextBox textBoxBirthday;
+        private System.Windows.Forms.TextBox textBoxEmail;
+        private System.Windows.Forms.Label labelMyBirthday;
+        private System.Windows.Forms.Label labelMyCity;
+        private System.Windows.Forms.Label labelMyEmail;
+        private System.Windows.Forms.TextBox textBoxCity;
+        private System.Windows.Forms.ListBox listBoxAlbums;
+        private System.Windows.Forms.ListBox listBoxPosts;
+        private System.Windows.Forms.Label labelAlbums;
+        private System.Windows.Forms.Label labelPosts;
     }
 }
 

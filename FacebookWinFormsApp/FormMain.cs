@@ -14,7 +14,7 @@ namespace BasicFacebookFeatures
     public partial class FormMain : Form
     {
         private User m_LoggedInUser;
-
+        private IList<Album> m_Albums;
         public FormMain()
         {
             InitializeComponent();
@@ -42,8 +42,6 @@ namespace BasicFacebookFeatures
                 "email",
                 "public_profile",
                 /// add any relevant permissions
-                "email",
-                "public_profile",
                 "user_birthday",
                 "user_events",
                 "user_hometown",
@@ -59,7 +57,8 @@ namespace BasicFacebookFeatures
                 pictureBoxProfile.ImageLocation = m_LoginResult.LoggedInUser.PictureNormalURL;
                 buttonLogin.Enabled = false;
                 buttonLogout.Enabled = true;
-               // fetchUserInfo();
+                m_LoggedInUser = m_LoginResult.LoggedInUser;
+                fetchUserInfo();
             }
 
         }
@@ -74,23 +73,75 @@ namespace BasicFacebookFeatures
             buttonLogout.Enabled = false;
         }
 
-        //private void fetchUserInfo()
-        //{
-        //    pictureBoxProfile.LoadAsync(m_LoggedInUser.PictureNormalURL);
-        //    textboxEmail.Text = m_LoggedInUser?.Email;
-        //    textboxBirthday.Text = m_LoggedInUser?.Birthday;
-        //    textboxCity.Text = m_LoggedInUser.Location?.Name;
-        //    selectedPagesLikesBox.Visible = true;
-        //    selectedPostBox.Visible = true;
-        //    fetchAlbums();
-        //    fetchLikes();
-        //    fetchPosts();
-        //    fetchEvents();
-        //}
+        private void fetchUserInfo()
+        {
+            //pictureBoxProfile.LoadAsync(m_LoggedInUser.PictureNormalURL);
+            textBoxEmail.Text = m_LoggedInUser?.Email;
+            textBoxBirthday.Text = m_LoggedInUser?.Birthday;
+            textBoxCity.Text = m_LoggedInUser.Location?.Name;
+            
+            //selectedPagesLikesBox.Visible = true;
+            //selectedPostBox.Visible = true;
+            fetchAlbums();
+            //fetchLikes();
+            fetchPosts();
+            //fetchEvents();
+        }
 
         private void fetchAlbums()
         {
+            listBoxAlbums.Items.Clear();
+            listBoxAlbums.DisplayMember = Texts.Name;
+            m_Albums = m_LoggedInUser.Albums;
+            foreach (Album album in m_Albums)
+            {
+                listBoxAlbums.Items.Add(album);
+                if (listBoxAlbums.Items.Count == 25)
+                {
+                    break;
+                }
+            }
 
+            if (listBoxAlbums.Items.Count == 0)
+            {
+                labelAlbums.Text = Texts.NoAlbumsFound;
+            }
         }
+
+        private void fetchPosts()
+        {
+            listBoxPosts.Items.Clear();
+            try
+            {
+                foreach (Post post in m_LoggedInUser.Posts)
+                {
+                    if (post.Message != null)
+                    {
+                        listBoxPosts.Items.Add(post);
+                    }
+                    else if (post.Caption != null) 
+                    {
+                        listBoxPosts.Items.Add(post);
+                    }
+
+                    if (listBoxPosts.Items.Count == 25)
+                    {
+                        break;
+                    }
+                }
+
+                if (listBoxPosts.Items.Count == 0)
+                {
+                    labelPosts.Text = Texts.NoPostsFound;
+                }
+            }
+            catch
+            {
+                listBoxPosts.Items.Add("First post");
+                listBoxPosts.Items.Add("Second post");
+                listBoxPosts.Items.Add("Third post");
+            }
+        }
+
     }
 }
