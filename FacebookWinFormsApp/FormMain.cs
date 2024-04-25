@@ -83,9 +83,9 @@ namespace BasicFacebookFeatures
             //selectedPagesLikesBox.Visible = true;
             //selectedPostBox.Visible = true;
             fetchAlbums();
-            //fetchLikes();
+            fetchLikes();
             fetchPosts();
-            //fetchEvents();
+            fetchEvents();
         }
 
         private void fetchAlbums()
@@ -143,5 +143,18 @@ namespace BasicFacebookFeatures
             }
         }
 
+        private void fetchLikes()
+        {
+            listBoxLikes.Items.Clear();
+            listBoxLikes.DisplayMember = "Name";
+            listBoxLikes.DataSource = m_LoggedInUser.LikedPages;
+        }
+
+        private void fetchEvents()
+        {
+            listBoxEvents.Items.Clear();
+            listBoxEvents.DisplayMember = "Name";
+            listBoxEvents.DataSource = m_LoggedInUser.EventsCreated;
+        }
     }
 }
