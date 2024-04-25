@@ -59,7 +59,7 @@ namespace BasicFacebookFeatures
                 pictureBoxProfile.ImageLocation = m_LoginResult.LoggedInUser.PictureNormalURL;
                 buttonLogin.Enabled = false;
                 buttonLogout.Enabled = true;
-                fetchUserInfo();
+               // fetchUserInfo();
             }
 
         }
@@ -74,19 +74,19 @@ namespace BasicFacebookFeatures
             buttonLogout.Enabled = false;
         }
 
-        private void fetchUserInfo()
-        {
-            pictureBoxProfile.LoadAsync(m_LoggedInUser.PictureNormalURL);
-            textboxEmail.Text = m_LoggedInUser?.Email;
-            textboxBirthday.Text = m_LoggedInUser?.Birthday;
-            textboxCity.Text = m_LoggedInUser.Location?.Name;
-            selectedPagesLikesBox.Visible = true;
-            selectedPostBox.Visible = true;
-            fetchAlbums();
-            fetchLikes();
-            fetchPosts();
-            fetchEvents();
-        }
+        //private void fetchUserInfo()
+        //{
+        //    pictureBoxProfile.LoadAsync(m_LoggedInUser.PictureNormalURL);
+        //    textboxEmail.Text = m_LoggedInUser?.Email;
+        //    textboxBirthday.Text = m_LoggedInUser?.Birthday;
+        //    textboxCity.Text = m_LoggedInUser.Location?.Name;
+        //    selectedPagesLikesBox.Visible = true;
+        //    selectedPostBox.Visible = true;
+        //    fetchAlbums();
+        //    fetchLikes();
+        //    fetchPosts();
+        //    fetchEvents();
+        //}
 
         private void fetchAlbums()
         {
