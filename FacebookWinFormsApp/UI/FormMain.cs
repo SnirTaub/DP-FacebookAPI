@@ -168,5 +168,40 @@ namespace BasicFacebookFeatures
                 }
             }
         }
+
+        private void displaySelectedAlbum()
+        {
+            Album selectedAlbum;
+
+            if (listBoxAlbums.SelectedItems.Count == 1)
+            {
+                selectedAlbum = listBoxAlbums.SelectedItem as Album;
+                if (selectedAlbum.PictureAlbumURL != null)
+                {
+                    selectedAlbumCover.LoadAsync(selectedAlbum.PictureAlbumURL);
+                }
+            }
+        }
+
+        private void displaySelectedPost()
+        {
+            Post selectedPost;
+
+            if (listBoxPosts.SelectedItems.Count == 1)
+            {
+                selectedPost = listBoxPosts.SelectedItem as Post;
+                selectedPostBox.Text = string.Format(Texts.PostDetails, selectedPost?.CreatedTime, selectedPost?.Message);
+            }
+        }
+
+        private void myAlbums_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            displaySelectedAlbum();
+        }
+
+        private void listBoxPosts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            displaySelectedPost();
+        }
     }
 }

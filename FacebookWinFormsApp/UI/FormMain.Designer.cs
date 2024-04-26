@@ -33,6 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.listBoxEvents = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -50,11 +51,13 @@
             this.pictureBoxProfile = new System.Windows.Forms.PictureBox();
             this.textBoxAppID = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.selectedAlbumCover = new System.Windows.Forms.PictureBox();
+            this.selectedPostBox = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.selectedAlbumCover)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonLogin
@@ -104,6 +107,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.selectedPostBox);
+            this.tabPage1.Controls.Add(this.selectedAlbumCover);
             this.tabPage1.Controls.Add(this.pictureBox1);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.listBoxEvents);
@@ -132,10 +137,19 @@
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(1040, 242);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(171, 148);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 71;
+            this.pictureBox1.TabStop = false;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(365, 429);
+            this.label3.Location = new System.Drawing.Point(774, 440);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 18);
             this.label3.TabIndex = 70;
@@ -145,7 +159,7 @@
             // 
             this.listBoxEvents.FormattingEnabled = true;
             this.listBoxEvents.ItemHeight = 18;
-            this.listBoxEvents.Location = new System.Drawing.Point(368, 475);
+            this.listBoxEvents.Location = new System.Drawing.Point(777, 475);
             this.listBoxEvents.Name = "listBoxEvents";
             this.listBoxEvents.Size = new System.Drawing.Size(171, 148);
             this.listBoxEvents.TabIndex = 69;
@@ -153,7 +167,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(365, 203);
+            this.label2.Location = new System.Drawing.Point(774, 203);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(71, 18);
             this.label2.TabIndex = 68;
@@ -163,7 +177,7 @@
             // 
             this.listBoxLikes.FormattingEnabled = true;
             this.listBoxLikes.ItemHeight = 18;
-            this.listBoxLikes.Location = new System.Drawing.Point(368, 242);
+            this.listBoxLikes.Location = new System.Drawing.Point(777, 242);
             this.listBoxLikes.Name = "listBoxLikes";
             this.listBoxLikes.Size = new System.Drawing.Size(171, 148);
             this.listBoxLikes.TabIndex = 67;
@@ -177,6 +191,7 @@
             this.listBoxAlbums.Name = "listBoxAlbums";
             this.listBoxAlbums.Size = new System.Drawing.Size(171, 148);
             this.listBoxAlbums.TabIndex = 66;
+            this.listBoxAlbums.SelectedIndexChanged += new System.EventHandler(this.myAlbums_SelectedIndexChanged);
             // 
             // listBoxPosts
             // 
@@ -186,6 +201,7 @@
             this.listBoxPosts.Name = "listBoxPosts";
             this.listBoxPosts.Size = new System.Drawing.Size(171, 148);
             this.listBoxPosts.TabIndex = 65;
+            this.listBoxPosts.SelectedIndexChanged += new System.EventHandler(this.listBoxPosts_SelectedIndexChanged);
             // 
             // labelAlbums
             // 
@@ -280,14 +296,25 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
+            // selectedAlbumCover
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(572, 242);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(171, 148);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 71;
-            this.pictureBox1.TabStop = false;
+            this.selectedAlbumCover.Location = new System.Drawing.Point(299, 475);
+            this.selectedAlbumCover.Name = "selectedAlbumCover";
+            this.selectedAlbumCover.Size = new System.Drawing.Size(171, 148);
+            this.selectedAlbumCover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.selectedAlbumCover.TabIndex = 72;
+            this.selectedAlbumCover.TabStop = false;
+            // 
+            // selectedPostBox
+            // 
+            this.selectedPostBox.BackColor = System.Drawing.SystemColors.Window;
+            this.selectedPostBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.selectedPostBox.Location = new System.Drawing.Point(299, 242);
+            this.selectedPostBox.Multiline = true;
+            this.selectedPostBox.Name = "selectedPostBox";
+            this.selectedPostBox.Size = new System.Drawing.Size(171, 148);
+            this.selectedPostBox.TabIndex = 60;
+            this.selectedPostBox.Text = "Choose a post";
             // 
             // FormMain
             // 
@@ -303,8 +330,9 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.selectedAlbumCover)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -334,6 +362,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox listBoxLikes;
         private System.Windows.Forms.PictureBox pictureBox1;
+        internal System.Windows.Forms.PictureBox selectedAlbumCover;
+        private System.Windows.Forms.TextBox selectedPostBox;
     }
 }
 
