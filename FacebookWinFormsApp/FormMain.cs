@@ -75,7 +75,6 @@ namespace BasicFacebookFeatures
 
         private void fetchUserInfo()
         {
-            //pictureBoxProfile.LoadAsync(m_LoggedInUser.PictureNormalURL);
             textBoxEmail.Text = m_LoggedInUser?.Email;
             textBoxBirthday.Text = m_LoggedInUser?.Birthday;
             textBoxCity.Text = m_LoggedInUser.Location?.Name;
@@ -146,15 +145,27 @@ namespace BasicFacebookFeatures
         private void fetchLikes()
         {
             listBoxLikes.Items.Clear();
-            listBoxLikes.DisplayMember = "Name";
+            listBoxLikes.DisplayMember = Texts.Name;
             listBoxLikes.DataSource = m_LoggedInUser.LikedPages;
         }
 
         private void fetchEvents()
         {
             listBoxEvents.Items.Clear();
-            listBoxEvents.DisplayMember = "Name";
+            listBoxEvents.DisplayMember = Texts.Name;
             listBoxEvents.DataSource = m_LoggedInUser.EventsCreated;
+        }
+
+        private void listBoxLikes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxLikes.SelectedIndex != -1)
+            {
+                if (listBoxLikes.SelectedItems.Count == 1)
+                {
+                    Page selectedPage = (Page)listBoxLikes.SelectedItem;
+                    pictureBox1.Image = selectedPage.ImageNormal;
+                }
+            }
         }
     }
 }
