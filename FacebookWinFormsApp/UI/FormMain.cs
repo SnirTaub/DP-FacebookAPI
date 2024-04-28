@@ -60,6 +60,7 @@ namespace BasicFacebookFeatures
                 buttonLogout.Enabled = true;
                 m_LoggedInUser = m_LoginResult.LoggedInUser;
                 fetchUserInfo();
+                enableSchedulePostFeature();
             }
 
         }
@@ -81,13 +82,13 @@ namespace BasicFacebookFeatures
             textBoxCity.Text = m_LoggedInUser.Location?.Name;
             
             //selectedPagesLikesBox.Visible = true;
-            //selectedPostBox.Visible = true;
+            selectedPostBox.Visible = true;
             fetchAlbums();
             fetchLikes();
             fetchPosts();
             fetchEvents();
         }
-
+        
         private void fetchAlbums()
         {
             listBoxAlbums.Items.Clear();
@@ -202,6 +203,14 @@ namespace BasicFacebookFeatures
         private void listBoxPosts_SelectedIndexChanged(object sender, EventArgs e)
         {
             displaySelectedPost();
+        }
+
+        private void enableSchedulePostFeature()
+        {
+            labelWelcomePostScheduling.Text = Texts.MyScheduledPosts;
+            buttonAddSchedulePost.Visible = true;
+            buttonShowAllScheduledPosts.Visible = true;
+            //fetchScheduledPosts();
         }
     }
 }

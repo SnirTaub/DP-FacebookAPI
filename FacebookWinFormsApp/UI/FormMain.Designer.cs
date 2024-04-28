@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.buttonLogout = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabMain = new System.Windows.Forms.TabPage();
+            this.selectedPostBox = new System.Windows.Forms.TextBox();
+            this.selectedAlbumCover = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.listBoxEvents = new System.Windows.Forms.ListBox();
@@ -50,14 +53,29 @@
             this.labelMyEmail = new System.Windows.Forms.Label();
             this.pictureBoxProfile = new System.Windows.Forms.PictureBox();
             this.textBoxAppID = new System.Windows.Forms.TextBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.selectedAlbumCover = new System.Windows.Forms.PictureBox();
-            this.selectedPostBox = new System.Windows.Forms.TextBox();
+            this.tabScheduleAPost = new System.Windows.Forms.TabPage();
+            this.buttonEditSelectedSchedulePost = new System.Windows.Forms.Button();
+            this.buttonAddSchedulePost = new System.Windows.Forms.Button();
+            this.buttonRemoveScheduledPost = new System.Windows.Forms.Button();
+            this.buttonPublishedPosts = new System.Windows.Forms.Button();
+            this.buttonShowAllScheduledPosts = new System.Windows.Forms.Button();
+            this.buttonViewPostBody = new System.Windows.Forms.Button();
+            this.buttonUnpublishedPosts = new System.Windows.Forms.Button();
+            this.dataGridPostScheduler = new System.Windows.Forms.DataGridView();
+            this.postId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.postBody = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.uploadDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.postPrivacyLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.postStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.labelWelcomePostScheduling = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.selectedAlbumCover)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.selectedAlbumCover)).BeginInit();
+            this.tabScheduleAPost.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPostScheduler)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonLogin
@@ -96,8 +114,9 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabMain);
+            this.tabControl1.Controls.Add(this.tabScheduleAPost);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -105,37 +124,58 @@
             this.tabControl1.Size = new System.Drawing.Size(1243, 697);
             this.tabControl1.TabIndex = 54;
             // 
-            // tabPage1
+            // tabMain
             // 
-            this.tabPage1.Controls.Add(this.selectedPostBox);
-            this.tabPage1.Controls.Add(this.selectedAlbumCover);
-            this.tabPage1.Controls.Add(this.pictureBox1);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.listBoxEvents);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.listBoxLikes);
-            this.tabPage1.Controls.Add(this.listBoxAlbums);
-            this.tabPage1.Controls.Add(this.listBoxPosts);
-            this.tabPage1.Controls.Add(this.labelAlbums);
-            this.tabPage1.Controls.Add(this.labelPosts);
-            this.tabPage1.Controls.Add(this.textBoxCity);
-            this.tabPage1.Controls.Add(this.textBoxBirthday);
-            this.tabPage1.Controls.Add(this.textBoxEmail);
-            this.tabPage1.Controls.Add(this.labelMyBirthday);
-            this.tabPage1.Controls.Add(this.labelMyCity);
-            this.tabPage1.Controls.Add(this.labelMyEmail);
-            this.tabPage1.Controls.Add(this.pictureBoxProfile);
-            this.tabPage1.Controls.Add(this.textBoxAppID);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.buttonLogout);
-            this.tabPage1.Controls.Add(this.buttonLogin);
-            this.tabPage1.Location = new System.Drawing.Point(4, 27);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1235, 666);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabMain.Controls.Add(this.selectedPostBox);
+            this.tabMain.Controls.Add(this.selectedAlbumCover);
+            this.tabMain.Controls.Add(this.pictureBox1);
+            this.tabMain.Controls.Add(this.label3);
+            this.tabMain.Controls.Add(this.listBoxEvents);
+            this.tabMain.Controls.Add(this.label2);
+            this.tabMain.Controls.Add(this.listBoxLikes);
+            this.tabMain.Controls.Add(this.listBoxAlbums);
+            this.tabMain.Controls.Add(this.listBoxPosts);
+            this.tabMain.Controls.Add(this.labelAlbums);
+            this.tabMain.Controls.Add(this.labelPosts);
+            this.tabMain.Controls.Add(this.textBoxCity);
+            this.tabMain.Controls.Add(this.textBoxBirthday);
+            this.tabMain.Controls.Add(this.textBoxEmail);
+            this.tabMain.Controls.Add(this.labelMyBirthday);
+            this.tabMain.Controls.Add(this.labelMyCity);
+            this.tabMain.Controls.Add(this.labelMyEmail);
+            this.tabMain.Controls.Add(this.pictureBoxProfile);
+            this.tabMain.Controls.Add(this.textBoxAppID);
+            this.tabMain.Controls.Add(this.label1);
+            this.tabMain.Controls.Add(this.buttonLogout);
+            this.tabMain.Controls.Add(this.buttonLogin);
+            this.tabMain.Location = new System.Drawing.Point(4, 27);
+            this.tabMain.Name = "tabMain";
+            this.tabMain.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMain.Size = new System.Drawing.Size(1235, 666);
+            this.tabMain.TabIndex = 0;
+            this.tabMain.Text = "Main";
+            this.tabMain.UseVisualStyleBackColor = true;
+            // 
+            // selectedPostBox
+            // 
+            this.selectedPostBox.BackColor = System.Drawing.SystemColors.Window;
+            this.selectedPostBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.selectedPostBox.Location = new System.Drawing.Point(299, 242);
+            this.selectedPostBox.Multiline = true;
+            this.selectedPostBox.Name = "selectedPostBox";
+            this.selectedPostBox.Size = new System.Drawing.Size(171, 148);
+            this.selectedPostBox.TabIndex = 60;
+            this.selectedPostBox.Text = "Choose a post";
+            this.selectedPostBox.Visible = false;
+            // 
+            // selectedAlbumCover
+            // 
+            this.selectedAlbumCover.Location = new System.Drawing.Point(299, 475);
+            this.selectedAlbumCover.Name = "selectedAlbumCover";
+            this.selectedAlbumCover.Size = new System.Drawing.Size(171, 148);
+            this.selectedAlbumCover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.selectedAlbumCover.TabIndex = 72;
+            this.selectedAlbumCover.TabStop = false;
             // 
             // pictureBox1
             // 
@@ -286,35 +326,187 @@
             this.textBoxAppID.TabIndex = 54;
             this.textBoxAppID.Text = "1450160541956417";
             // 
-            // tabPage2
+            // tabScheduleAPost
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 27);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1235, 666);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabScheduleAPost.Controls.Add(this.buttonEditSelectedSchedulePost);
+            this.tabScheduleAPost.Controls.Add(this.buttonAddSchedulePost);
+            this.tabScheduleAPost.Controls.Add(this.buttonRemoveScheduledPost);
+            this.tabScheduleAPost.Controls.Add(this.buttonPublishedPosts);
+            this.tabScheduleAPost.Controls.Add(this.buttonShowAllScheduledPosts);
+            this.tabScheduleAPost.Controls.Add(this.buttonViewPostBody);
+            this.tabScheduleAPost.Controls.Add(this.buttonUnpublishedPosts);
+            this.tabScheduleAPost.Controls.Add(this.dataGridPostScheduler);
+            this.tabScheduleAPost.Controls.Add(this.labelWelcomePostScheduling);
+            this.tabScheduleAPost.Location = new System.Drawing.Point(4, 27);
+            this.tabScheduleAPost.Name = "tabScheduleAPost";
+            this.tabScheduleAPost.Padding = new System.Windows.Forms.Padding(3);
+            this.tabScheduleAPost.Size = new System.Drawing.Size(1235, 666);
+            this.tabScheduleAPost.TabIndex = 1;
+            this.tabScheduleAPost.Text = "Schedule a post";
+            this.tabScheduleAPost.UseVisualStyleBackColor = true;
             // 
-            // selectedAlbumCover
+            // buttonEditSelectedSchedulePost
             // 
-            this.selectedAlbumCover.Location = new System.Drawing.Point(299, 475);
-            this.selectedAlbumCover.Name = "selectedAlbumCover";
-            this.selectedAlbumCover.Size = new System.Drawing.Size(171, 148);
-            this.selectedAlbumCover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.selectedAlbumCover.TabIndex = 72;
-            this.selectedAlbumCover.TabStop = false;
+            this.buttonEditSelectedSchedulePost.Location = new System.Drawing.Point(315, 506);
+            this.buttonEditSelectedSchedulePost.Name = "buttonEditSelectedSchedulePost";
+            this.buttonEditSelectedSchedulePost.Size = new System.Drawing.Size(228, 33);
+            this.buttonEditSelectedSchedulePost.TabIndex = 10;
+            this.buttonEditSelectedSchedulePost.Text = "Edit selected scheduled post";
+            this.buttonEditSelectedSchedulePost.UseVisualStyleBackColor = true;
+            this.buttonEditSelectedSchedulePost.Visible = false;
             // 
-            // selectedPostBox
+            // buttonAddSchedulePost
             // 
-            this.selectedPostBox.BackColor = System.Drawing.SystemColors.Window;
-            this.selectedPostBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.selectedPostBox.Location = new System.Drawing.Point(299, 242);
-            this.selectedPostBox.Multiline = true;
-            this.selectedPostBox.Name = "selectedPostBox";
-            this.selectedPostBox.Size = new System.Drawing.Size(171, 148);
-            this.selectedPostBox.TabIndex = 60;
-            this.selectedPostBox.Text = "Choose a post";
+            this.buttonAddSchedulePost.Location = new System.Drawing.Point(14, 506);
+            this.buttonAddSchedulePost.Name = "buttonAddSchedulePost";
+            this.buttonAddSchedulePost.Size = new System.Drawing.Size(202, 33);
+            this.buttonAddSchedulePost.TabIndex = 9;
+            this.buttonAddSchedulePost.Text = "Schedule a new post";
+            this.buttonAddSchedulePost.UseVisualStyleBackColor = true;
+            this.buttonAddSchedulePost.Visible = false;
+            // 
+            // buttonRemoveScheduledPost
+            // 
+            this.buttonRemoveScheduledPost.Location = new System.Drawing.Point(975, 506);
+            this.buttonRemoveScheduledPost.Name = "buttonRemoveScheduledPost";
+            this.buttonRemoveScheduledPost.Size = new System.Drawing.Size(242, 33);
+            this.buttonRemoveScheduledPost.TabIndex = 8;
+            this.buttonRemoveScheduledPost.Text = "Remove selected post";
+            this.buttonRemoveScheduledPost.UseVisualStyleBackColor = true;
+            this.buttonRemoveScheduledPost.Visible = false;
+            // 
+            // buttonPublishedPosts
+            // 
+            this.buttonPublishedPosts.Location = new System.Drawing.Point(233, 86);
+            this.buttonPublishedPosts.Name = "buttonPublishedPosts";
+            this.buttonPublishedPosts.Size = new System.Drawing.Size(191, 34);
+            this.buttonPublishedPosts.TabIndex = 7;
+            this.buttonPublishedPosts.Text = "Show published posts";
+            this.buttonPublishedPosts.UseVisualStyleBackColor = true;
+            this.buttonPublishedPosts.Visible = false;
+            // 
+            // buttonShowAllScheduledPosts
+            // 
+            this.buttonShowAllScheduledPosts.Location = new System.Drawing.Point(14, 86);
+            this.buttonShowAllScheduledPosts.Name = "buttonShowAllScheduledPosts";
+            this.buttonShowAllScheduledPosts.Size = new System.Drawing.Size(191, 34);
+            this.buttonShowAllScheduledPosts.TabIndex = 6;
+            this.buttonShowAllScheduledPosts.Text = "Show all posts";
+            this.buttonShowAllScheduledPosts.UseVisualStyleBackColor = true;
+            this.buttonShowAllScheduledPosts.Visible = false;
+            // 
+            // buttonViewPostBody
+            // 
+            this.buttonViewPostBody.Location = new System.Drawing.Point(645, 506);
+            this.buttonViewPostBody.Name = "buttonViewPostBody";
+            this.buttonViewPostBody.Size = new System.Drawing.Size(230, 33);
+            this.buttonViewPostBody.TabIndex = 5;
+            this.buttonViewPostBody.Text = "View post body";
+            this.buttonViewPostBody.UseVisualStyleBackColor = true;
+            this.buttonViewPostBody.Visible = false;
+            // 
+            // buttonUnpublishedPosts
+            // 
+            this.buttonUnpublishedPosts.Location = new System.Drawing.Point(451, 86);
+            this.buttonUnpublishedPosts.Name = "buttonUnpublishedPosts";
+            this.buttonUnpublishedPosts.Size = new System.Drawing.Size(191, 34);
+            this.buttonUnpublishedPosts.TabIndex = 4;
+            this.buttonUnpublishedPosts.Text = "Show unpublished posts";
+            this.buttonUnpublishedPosts.UseVisualStyleBackColor = true;
+            this.buttonUnpublishedPosts.Visible = false;
+            // 
+            // dataGridPostScheduler
+            // 
+            this.dataGridPostScheduler.AllowUserToAddRows = false;
+            this.dataGridPostScheduler.AllowUserToDeleteRows = false;
+            this.dataGridPostScheduler.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridPostScheduler.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridPostScheduler.BackgroundColor = System.Drawing.Color.PapayaWhip;
+            this.dataGridPostScheduler.ColumnHeadersHeight = 58;
+            this.dataGridPostScheduler.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridPostScheduler.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.postId,
+            this.postBody,
+            this.uploadDate,
+            this.postPrivacyLevel,
+            this.postStatus});
+            this.dataGridPostScheduler.Location = new System.Drawing.Point(14, 142);
+            this.dataGridPostScheduler.MultiSelect = false;
+            this.dataGridPostScheduler.Name = "dataGridPostScheduler";
+            this.dataGridPostScheduler.ReadOnly = true;
+            this.dataGridPostScheduler.ShowEditingIcon = false;
+            this.dataGridPostScheduler.Size = new System.Drawing.Size(1203, 326);
+            this.dataGridPostScheduler.TabIndex = 0;
+            // 
+            // postId
+            // 
+            this.postId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.postId.HeaderText = "Post ID";
+            this.postId.MinimumWidth = 20;
+            this.postId.Name = "postId";
+            this.postId.ReadOnly = true;
+            this.postId.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // postBody
+            // 
+            this.postBody.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.postBody.HeaderText = "Post Body";
+            this.postBody.MinimumWidth = 20;
+            this.postBody.Name = "postBody";
+            this.postBody.ReadOnly = true;
+            this.postBody.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // uploadDate
+            // 
+            this.uploadDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.uploadDate.HeaderText = "Upload Date";
+            this.uploadDate.MinimumWidth = 20;
+            this.uploadDate.Name = "uploadDate";
+            this.uploadDate.ReadOnly = true;
+            this.uploadDate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // postPrivacyLevel
+            // 
+            this.postPrivacyLevel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.postPrivacyLevel.HeaderText = "Privacy Level";
+            this.postPrivacyLevel.MinimumWidth = 20;
+            this.postPrivacyLevel.Name = "postPrivacyLevel";
+            this.postPrivacyLevel.ReadOnly = true;
+            this.postPrivacyLevel.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // postStatus
+            // 
+            this.postStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.postStatus.HeaderText = "Post Status";
+            this.postStatus.MinimumWidth = 20;
+            this.postStatus.Name = "postStatus";
+            this.postStatus.ReadOnly = true;
+            this.postStatus.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // labelWelcomePostScheduling
+            // 
+            this.labelWelcomePostScheduling.AutoSize = true;
+            this.labelWelcomePostScheduling.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelWelcomePostScheduling.Location = new System.Drawing.Point(8, 18);
+            this.labelWelcomePostScheduling.Name = "labelWelcomePostScheduling";
+            this.labelWelcomePostScheduling.Size = new System.Drawing.Size(416, 31);
+            this.labelWelcomePostScheduling.TabIndex = 3;
+            this.labelWelcomePostScheduling.Text = "Please login to perform actions";
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 27);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(1235, 666);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "tabPage3";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
@@ -323,16 +515,20 @@
             this.ClientSize = new System.Drawing.Size(1243, 697);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "My Facebook App";
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.tabMain.ResumeLayout(false);
+            this.tabMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.selectedAlbumCover)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.selectedAlbumCover)).EndInit();
+            this.tabScheduleAPost.ResumeLayout(false);
+            this.tabScheduleAPost.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPostScheduler)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -343,8 +539,8 @@
 		private System.Windows.Forms.Button buttonLogout;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.TabControl tabControl1;
-		private System.Windows.Forms.TabPage tabPage1;
-		private System.Windows.Forms.TabPage tabPage2;
+		private System.Windows.Forms.TabPage tabMain;
+		private System.Windows.Forms.TabPage tabScheduleAPost;
         private System.Windows.Forms.TextBox textBoxAppID;
         private System.Windows.Forms.PictureBox pictureBoxProfile;
         private System.Windows.Forms.TextBox textBoxBirthday;
@@ -364,6 +560,21 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         internal System.Windows.Forms.PictureBox selectedAlbumCover;
         private System.Windows.Forms.TextBox selectedPostBox;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button buttonEditSelectedSchedulePost;
+        private System.Windows.Forms.Button buttonAddSchedulePost;
+        private System.Windows.Forms.Button buttonRemoveScheduledPost;
+        private System.Windows.Forms.Button buttonPublishedPosts;
+        private System.Windows.Forms.Button buttonShowAllScheduledPosts;
+        private System.Windows.Forms.Button buttonViewPostBody;
+        private System.Windows.Forms.Button buttonUnpublishedPosts;
+        private System.Windows.Forms.DataGridView dataGridPostScheduler;
+        private System.Windows.Forms.DataGridViewTextBoxColumn postId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn postBody;
+        private System.Windows.Forms.DataGridViewTextBoxColumn uploadDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn postPrivacyLevel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn postStatus;
+        private System.Windows.Forms.Label labelWelcomePostScheduling;
     }
 }
 
