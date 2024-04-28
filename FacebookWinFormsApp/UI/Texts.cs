@@ -13,5 +13,6 @@ namespace BasicFacebookFeatures.UI
         internal const string NoPostsFound = "No posts were found";
         internal const string PostDetails = @"The post was created at: {0},
 The message of the post is: {1}";
+        internal const string MyScheduledPosts = "My Scheduled Posts";
     }
 }
