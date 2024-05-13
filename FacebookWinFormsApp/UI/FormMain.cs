@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using BasicFacebookFeatures.UI;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
+using BasicFacebookFeatures.Logic.ScheduledPost;
 
 namespace BasicFacebookFeatures
 {
@@ -16,6 +17,8 @@ namespace BasicFacebookFeatures
     {
         private User m_LoggedInUser;
         private IList<Album> m_Albums;
+        private ScheduledPostsManager m_ScheduledPostsManager;
+        private IList<ScheduledPost> m_ScheduledPosts;
         public FormMain()
         {
             InitializeComponent();
@@ -210,7 +213,57 @@ namespace BasicFacebookFeatures
             labelWelcomePostScheduling.Text = Texts.MyScheduledPosts;
             buttonAddSchedulePost.Visible = true;
             buttonShowAllScheduledPosts.Visible = true;
-            //fetchScheduledPosts();
+            fetchScheduledPosts();
+        }
+
+        private void scheduledPostPosted()
+        {
+            fetchScheduledPosts();
+        }
+
+        private void fetchScheduledPosts()
+        {
+            dataGridPostScheduler.Rows.Clear();
+            m_ScheduledPosts = m_ScheduledPostsManager.GetScheduledPostsAsList();
+            foreach (ScheduledPost scheduledPost in m_ScheduledPosts)
+            {
+                addRowToScheduledPostsGrid(scheduledPost);
+                scheduledPost.PostShared += scheduledPostPosted;
+            }
+
+            dataGridPostScheduler.Refresh();
+            if (dataGridPostScheduler.Rows.Count > 0)
+            {
+                buttonRemoveScheduledPost.Enabled = true;
+                buttonEditSelectedSchedulePost.Enabled = true;
+                buttonPublishedPosts.Enabled = true;
+                buttonUnpublishedPosts.Enabled = true;
+                buttonViewPostBody.Enabled = true;
+            }
+            else
+            {
+                buttonRemoveScheduledPost.Enabled = false;
+                buttonEditSelectedSchedulePost.Enabled = false;
+                buttonPublishedPosts.Enabled = false;
+                buttonUnpublishedPosts.Enabled = false;
+                buttonViewPostBody.Enabled = false;
+            }
+        }
+
+        private void addRowToScheduledPostsGrid(ScheduledPost i_ScheduledPost)
+        {
+            string postStatus = Texts.Pending;
+
+            if (i_ScheduledPost.IsPosted)
+            {
+                postStatus = Texts.Posted;
+            }
+
+            dataGridPostScheduler.Rows.Add(i_ScheduledPost.ScheduledPostId,
+                i_ScheduledPost.PostBody,
+                i_ScheduledPost.ScheduledPostTimeToUpload,
+                UiUtils.getPrivacyText(i_ScheduledPost.Privacy),
+                postStatus);
         }
     }
 }
