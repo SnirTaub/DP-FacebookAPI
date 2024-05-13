@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BasicFacebookFeatures.Logic.ScheduledPost
+﻿namespace BasicFacebookFeatures.Logic.ScheduledPost
 {
-    class Class1
+    internal enum ePrivacyType
     {
+        SELF,
+        EVERYONE,
+        ALL_FRIENDS
     }
 }

@@ -218,7 +218,7 @@ namespace BasicFacebookFeatures
 
         private void scheduledPostPosted()
         {
-            fetchScheduledPosts();
+            fetchScheduledPosts()
         }
 
         private void fetchScheduledPosts()
