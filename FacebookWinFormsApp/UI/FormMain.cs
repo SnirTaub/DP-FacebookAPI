@@ -54,6 +54,7 @@ namespace BasicFacebookFeatures
                 "user_posts"
                 );
 
+            m_ScheduledPostsManager = new ScheduledPostsManager();
             if (string.IsNullOrEmpty(m_LoginResult.ErrorMessage))
             {
                 buttonLogin.Text = $"Logged in as {m_LoginResult.LoggedInUser.Name}";
@@ -218,7 +219,7 @@ namespace BasicFacebookFeatures
 
         private void scheduledPostPosted()
         {
-            fetchScheduledPosts()
+            fetchScheduledPosts();
         }
 
         private void fetchScheduledPosts()
@@ -234,19 +235,19 @@ namespace BasicFacebookFeatures
             dataGridPostScheduler.Refresh();
             if (dataGridPostScheduler.Rows.Count > 0)
             {
-                buttonRemoveScheduledPost.Enabled = true;
-                buttonEditSelectedSchedulePost.Enabled = true;
-                buttonPublishedPosts.Enabled = true;
-                buttonUnpublishedPosts.Enabled = true;
-                buttonViewPostBody.Enabled = true;
+                buttonRemoveScheduledPost.Visible = true;
+                buttonEditSelectedSchedulePost.Visible = true;
+                buttonPublishedPosts.Visible = true;
+                buttonUnpublishedPosts.Visible = true;
+                buttonViewPostBody.Visible = true;
             }
             else
             {
-                buttonRemoveScheduledPost.Enabled = false;
-                buttonEditSelectedSchedulePost.Enabled = false;
-                buttonPublishedPosts.Enabled = false;
-                buttonUnpublishedPosts.Enabled = false;
-                buttonViewPostBody.Enabled = false;
+                buttonRemoveScheduledPost.Visible = false;
+                buttonEditSelectedSchedulePost.Visible = false;
+                buttonPublishedPosts.Visible = false;
+                buttonUnpublishedPosts.Visible = false;
+                buttonViewPostBody.Visible = false;
             }
         }
 
@@ -264,6 +265,92 @@ namespace BasicFacebookFeatures
                 i_ScheduledPost.ScheduledPostTimeToUpload,
                 UiUtils.getPrivacyText(i_ScheduledPost.Privacy),
                 postStatus);
+        }
+
+        private void dataGridPostScheduler_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            buttonEditSelectedSchedulePost.Visible = true;
+        }
+
+        private void buttonAddSchedulePost_Click(object sender, EventArgs e)
+        {
+            FormAddScheduledPost scheduledPostForm = new FormAddScheduledPost(m_ScheduledPostsManager, m_LoggedInUser);
+            scheduledPostForm.ShowDialog();
+            fetchScheduledPosts();
+        }
+
+        private void buttonRemoveScheduledPost_Click(object sender, EventArgs e)
+        {
+            ScheduledPost postToRemove;
+            int postIdToChange = int.Parse(UiUtils.GetSelectedRow(dataGridPostScheduler).Cells["PostId"].Value.ToString());
+
+            if (m_ScheduledPostsManager.IsPostContained(postIdToChange))
+            {
+                postToRemove = m_ScheduledPostsManager.GetPostById(postIdToChange);
+                postToRemove.RemovePostFromList();
+                fetchScheduledPosts();
+            }
+            else
+            {
+                MessageBox.Show(Texts.RemovePost);
+            }
+        }
+
+        private void buttonShowAllScheduledPosts_Click(object sender, EventArgs e)
+        {
+            fetchScheduledPosts();
+        }
+
+        private void buttonPublishedPosts_Click(object sender, EventArgs e)
+        {
+            IList<ScheduledPost> currentScheduledPosts = m_ScheduledPostsManager.GetScheduledPostsAsList();
+
+            dataGridPostScheduler.Rows.Clear();
+            foreach (ScheduledPost scheduledPost in currentScheduledPosts)
+            {
+                if (scheduledPost.IsPosted == true)
+                {
+                    addRowToScheduledPostsGrid(scheduledPost);
+                }
+            }
+        }
+
+        private void buttonUnpublishedPosts_Click(object sender, EventArgs e)
+        {
+            IList<ScheduledPost> currentScheduledPosts = m_ScheduledPostsManager.GetScheduledPostsAsList();
+
+            dataGridPostScheduler.Rows.Clear();
+            foreach (ScheduledPost scheduledPost in currentScheduledPosts)
+            {
+                if (scheduledPost.IsPosted == false)
+                {
+                    addRowToScheduledPostsGrid(scheduledPost);
+                }
+            }
+        }
+
+        private void buttonEditSelectedSchedulePost_Click(object sender, EventArgs e)
+        {
+            FormEditScheduledPost scheduledPostForm;
+            int postIdToChange = int.Parse(UiUtils.GetSelectedRow(dataGridPostScheduler).Cells["postId"].Value.ToString());
+
+            if (m_ScheduledPostsManager.IsPostContained(postIdToChange) &&
+                !m_ScheduledPostsManager.GetPostById(postIdToChange).IsPosted)
+            {
+                scheduledPostForm = new FormEditScheduledPost(m_ScheduledPostsManager, m_LoggedInUser, postIdToChange, dataGridPostScheduler);
+                scheduledPostForm.ShowDialog();
+                fetchScheduledPosts();
+            }
+            else
+            {
+                MessageBox.Show(Texts.EditPost);
+            }
+        }
+
+        private void buttonViewPostBody_Click(object sender, EventArgs e)
+        {
+            string postIdToChange = UiUtils.GetSelectedRow(dataGridPostScheduler).Cells["PostBody"].Value.ToString();
+            MessageBox.Show(postIdToChange, Texts.PostBody);
         }
     }
 }
