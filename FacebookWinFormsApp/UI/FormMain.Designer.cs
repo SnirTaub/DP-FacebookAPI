@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.buttonLogout = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -354,6 +354,7 @@
             this.buttonEditSelectedSchedulePost.Text = "Edit selected scheduled post";
             this.buttonEditSelectedSchedulePost.UseVisualStyleBackColor = true;
             this.buttonEditSelectedSchedulePost.Visible = false;
+            this.buttonEditSelectedSchedulePost.Click += new System.EventHandler(this.buttonEditSelectedSchedulePost_Click);
             // 
             // buttonAddSchedulePost
             // 
@@ -364,6 +365,7 @@
             this.buttonAddSchedulePost.Text = "Schedule a new post";
             this.buttonAddSchedulePost.UseVisualStyleBackColor = true;
             this.buttonAddSchedulePost.Visible = false;
+            this.buttonAddSchedulePost.Click += new System.EventHandler(this.buttonAddSchedulePost_Click);
             // 
             // buttonRemoveScheduledPost
             // 
@@ -374,6 +376,7 @@
             this.buttonRemoveScheduledPost.Text = "Remove selected post";
             this.buttonRemoveScheduledPost.UseVisualStyleBackColor = true;
             this.buttonRemoveScheduledPost.Visible = false;
+            this.buttonRemoveScheduledPost.Click += new System.EventHandler(this.buttonRemoveScheduledPost_Click);
             // 
             // buttonPublishedPosts
             // 
@@ -384,6 +387,7 @@
             this.buttonPublishedPosts.Text = "Show published posts";
             this.buttonPublishedPosts.UseVisualStyleBackColor = true;
             this.buttonPublishedPosts.Visible = false;
+            this.buttonPublishedPosts.Click += new System.EventHandler(this.buttonPublishedPosts_Click);
             // 
             // buttonShowAllScheduledPosts
             // 
@@ -394,6 +398,7 @@
             this.buttonShowAllScheduledPosts.Text = "Show all posts";
             this.buttonShowAllScheduledPosts.UseVisualStyleBackColor = true;
             this.buttonShowAllScheduledPosts.Visible = false;
+            this.buttonShowAllScheduledPosts.Click += new System.EventHandler(this.buttonShowAllScheduledPosts_Click);
             // 
             // buttonViewPostBody
             // 
@@ -404,6 +409,7 @@
             this.buttonViewPostBody.Text = "View post body";
             this.buttonViewPostBody.UseVisualStyleBackColor = true;
             this.buttonViewPostBody.Visible = false;
+            this.buttonViewPostBody.Click += new System.EventHandler(this.buttonViewPostBody_Click);
             // 
             // buttonUnpublishedPosts
             // 
@@ -414,19 +420,20 @@
             this.buttonUnpublishedPosts.Text = "Show unpublished posts";
             this.buttonUnpublishedPosts.UseVisualStyleBackColor = true;
             this.buttonUnpublishedPosts.Visible = false;
+            this.buttonUnpublishedPosts.Click += new System.EventHandler(this.buttonUnpublishedPosts_Click);
             // 
             // dataGridPostScheduler
             // 
             this.dataGridPostScheduler.AllowUserToAddRows = false;
             this.dataGridPostScheduler.AllowUserToDeleteRows = false;
             this.dataGridPostScheduler.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridPostScheduler.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridPostScheduler.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridPostScheduler.BackgroundColor = System.Drawing.Color.PapayaWhip;
             this.dataGridPostScheduler.ColumnHeadersHeight = 58;
             this.dataGridPostScheduler.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
@@ -443,6 +450,7 @@
             this.dataGridPostScheduler.ShowEditingIcon = false;
             this.dataGridPostScheduler.Size = new System.Drawing.Size(1203, 326);
             this.dataGridPostScheduler.TabIndex = 0;
+            this.dataGridPostScheduler.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridPostScheduler_CellContentClick);
             // 
             // postId
             // 
