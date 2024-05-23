@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.buttonLogout = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabMain = new System.Windows.Forms.TabPage();
+            this.textBoxPagesLikes = new System.Windows.Forms.TextBox();
             this.selectedPostBox = new System.Windows.Forms.TextBox();
             this.selectedAlbumCover = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelEvents = new System.Windows.Forms.Label();
             this.listBoxEvents = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelLikedPages = new System.Windows.Forms.Label();
             this.listBoxLikes = new System.Windows.Forms.ListBox();
             this.listBoxAlbums = new System.Windows.Forms.ListBox();
             this.listBoxPosts = new System.Windows.Forms.ListBox();
@@ -54,6 +54,8 @@
             this.pictureBoxProfile = new System.Windows.Forms.PictureBox();
             this.textBoxAppID = new System.Windows.Forms.TextBox();
             this.tabScheduleAPost = new System.Windows.Forms.TabPage();
+            this.buttonSearch = new System.Windows.Forms.Button();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.buttonEditSelectedSchedulePost = new System.Windows.Forms.Button();
             this.buttonAddSchedulePost = new System.Windows.Forms.Button();
             this.buttonRemoveScheduledPost = new System.Windows.Forms.Button();
@@ -69,10 +71,10 @@
             this.postStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelWelcomePostScheduling = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.textBoxEvents = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.selectedAlbumCover)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
             this.tabScheduleAPost.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPostScheduler)).BeginInit();
@@ -126,12 +128,13 @@
             // 
             // tabMain
             // 
+            this.tabMain.Controls.Add(this.textBoxEvents);
+            this.tabMain.Controls.Add(this.textBoxPagesLikes);
             this.tabMain.Controls.Add(this.selectedPostBox);
             this.tabMain.Controls.Add(this.selectedAlbumCover);
-            this.tabMain.Controls.Add(this.pictureBox1);
-            this.tabMain.Controls.Add(this.label3);
+            this.tabMain.Controls.Add(this.labelEvents);
             this.tabMain.Controls.Add(this.listBoxEvents);
-            this.tabMain.Controls.Add(this.label2);
+            this.tabMain.Controls.Add(this.labelLikedPages);
             this.tabMain.Controls.Add(this.listBoxLikes);
             this.tabMain.Controls.Add(this.listBoxAlbums);
             this.tabMain.Controls.Add(this.listBoxPosts);
@@ -156,6 +159,16 @@
             this.tabMain.Text = "Main";
             this.tabMain.UseVisualStyleBackColor = true;
             // 
+            // textBoxPagesLikes
+            // 
+            this.textBoxPagesLikes.Location = new System.Drawing.Point(1052, 242);
+            this.textBoxPagesLikes.Multiline = true;
+            this.textBoxPagesLikes.Name = "textBoxPagesLikes";
+            this.textBoxPagesLikes.Size = new System.Drawing.Size(159, 148);
+            this.textBoxPagesLikes.TabIndex = 73;
+            this.textBoxPagesLikes.Text = "Choose a page";
+            this.textBoxPagesLikes.Visible = false;
+            // 
             // selectedPostBox
             // 
             this.selectedPostBox.BackColor = System.Drawing.SystemColors.Window;
@@ -177,23 +190,14 @@
             this.selectedAlbumCover.TabIndex = 72;
             this.selectedAlbumCover.TabStop = false;
             // 
-            // pictureBox1
+            // labelEvents
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(1040, 242);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(171, 148);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 71;
-            this.pictureBox1.TabStop = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(774, 440);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 18);
-            this.label3.TabIndex = 70;
-            this.label3.Text = "My Events:";
+            this.labelEvents.AutoSize = true;
+            this.labelEvents.Location = new System.Drawing.Point(774, 440);
+            this.labelEvents.Name = "labelEvents";
+            this.labelEvents.Size = new System.Drawing.Size(81, 18);
+            this.labelEvents.TabIndex = 70;
+            this.labelEvents.Text = "My Events:";
             // 
             // listBoxEvents
             // 
@@ -204,14 +208,14 @@
             this.listBoxEvents.Size = new System.Drawing.Size(171, 148);
             this.listBoxEvents.TabIndex = 69;
             // 
-            // label2
+            // labelLikedPages
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(774, 203);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 18);
-            this.label2.TabIndex = 68;
-            this.label2.Text = "My Likes:";
+            this.labelLikedPages.AutoSize = true;
+            this.labelLikedPages.Location = new System.Drawing.Point(774, 203);
+            this.labelLikedPages.Name = "labelLikedPages";
+            this.labelLikedPages.Size = new System.Drawing.Size(117, 18);
+            this.labelLikedPages.TabIndex = 68;
+            this.labelLikedPages.Text = "My Liked Pages:";
             // 
             // listBoxLikes
             // 
@@ -328,6 +332,8 @@
             // 
             // tabScheduleAPost
             // 
+            this.tabScheduleAPost.Controls.Add(this.buttonSearch);
+            this.tabScheduleAPost.Controls.Add(this.textBoxSearch);
             this.tabScheduleAPost.Controls.Add(this.buttonEditSelectedSchedulePost);
             this.tabScheduleAPost.Controls.Add(this.buttonAddSchedulePost);
             this.tabScheduleAPost.Controls.Add(this.buttonRemoveScheduledPost);
@@ -345,9 +351,35 @@
             this.tabScheduleAPost.Text = "Schedule a post";
             this.tabScheduleAPost.UseVisualStyleBackColor = true;
             // 
+            // buttonSearch
+            // 
+            this.buttonSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Bold);
+            this.buttonSearch.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buttonSearch.Location = new System.Drawing.Point(293, 148);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(75, 24);
+            this.buttonSearch.TabIndex = 55;
+            this.buttonSearch.Text = "Search";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Visible = false;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
+            // 
+            // textBoxSearch
+            // 
+            this.textBoxSearch.ForeColor = System.Drawing.Color.Gray;
+            this.textBoxSearch.Location = new System.Drawing.Point(14, 148);
+            this.textBoxSearch.MaxLength = 30;
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(273, 24);
+            this.textBoxSearch.TabIndex = 11;
+            this.textBoxSearch.Text = "Search post body...";
+            this.textBoxSearch.Visible = false;
+            this.textBoxSearch.Enter += new System.EventHandler(this.textBoxSearch_Enter);
+            this.textBoxSearch.Leave += new System.EventHandler(this.textBoxSearch_Leave);
+            // 
             // buttonEditSelectedSchedulePost
             // 
-            this.buttonEditSelectedSchedulePost.Location = new System.Drawing.Point(315, 506);
+            this.buttonEditSelectedSchedulePost.Location = new System.Drawing.Point(318, 521);
             this.buttonEditSelectedSchedulePost.Name = "buttonEditSelectedSchedulePost";
             this.buttonEditSelectedSchedulePost.Size = new System.Drawing.Size(228, 33);
             this.buttonEditSelectedSchedulePost.TabIndex = 10;
@@ -358,7 +390,7 @@
             // 
             // buttonAddSchedulePost
             // 
-            this.buttonAddSchedulePost.Location = new System.Drawing.Point(14, 506);
+            this.buttonAddSchedulePost.Location = new System.Drawing.Point(14, 521);
             this.buttonAddSchedulePost.Name = "buttonAddSchedulePost";
             this.buttonAddSchedulePost.Size = new System.Drawing.Size(202, 33);
             this.buttonAddSchedulePost.TabIndex = 9;
@@ -369,7 +401,7 @@
             // 
             // buttonRemoveScheduledPost
             // 
-            this.buttonRemoveScheduledPost.Location = new System.Drawing.Point(975, 506);
+            this.buttonRemoveScheduledPost.Location = new System.Drawing.Point(975, 521);
             this.buttonRemoveScheduledPost.Name = "buttonRemoveScheduledPost";
             this.buttonRemoveScheduledPost.Size = new System.Drawing.Size(242, 33);
             this.buttonRemoveScheduledPost.TabIndex = 8;
@@ -402,7 +434,7 @@
             // 
             // buttonViewPostBody
             // 
-            this.buttonViewPostBody.Location = new System.Drawing.Point(645, 506);
+            this.buttonViewPostBody.Location = new System.Drawing.Point(647, 521);
             this.buttonViewPostBody.Name = "buttonViewPostBody";
             this.buttonViewPostBody.Size = new System.Drawing.Size(230, 33);
             this.buttonViewPostBody.TabIndex = 5;
@@ -427,13 +459,13 @@
             this.dataGridPostScheduler.AllowUserToAddRows = false;
             this.dataGridPostScheduler.AllowUserToDeleteRows = false;
             this.dataGridPostScheduler.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridPostScheduler.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridPostScheduler.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridPostScheduler.BackgroundColor = System.Drawing.Color.PapayaWhip;
             this.dataGridPostScheduler.ColumnHeadersHeight = 58;
             this.dataGridPostScheduler.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
@@ -443,7 +475,7 @@
             this.uploadDate,
             this.postPrivacyLevel,
             this.postStatus});
-            this.dataGridPostScheduler.Location = new System.Drawing.Point(14, 142);
+            this.dataGridPostScheduler.Location = new System.Drawing.Point(14, 174);
             this.dataGridPostScheduler.MultiSelect = false;
             this.dataGridPostScheduler.Name = "dataGridPostScheduler";
             this.dataGridPostScheduler.ReadOnly = true;
@@ -516,6 +548,17 @@
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // textBoxEvents
+            // 
+            this.textBoxEvents.Location = new System.Drawing.Point(1052, 475);
+            this.textBoxEvents.Multiline = true;
+            this.textBoxEvents.Name = "textBoxEvents";
+            this.textBoxEvents.Size = new System.Drawing.Size(159, 148);
+            this.textBoxEvents.TabIndex = 74;
+            this.textBoxEvents.Text = "choose an event";
+            this.textBoxEvents.Visible = false;
+            this.textBoxEvents.TextChanged += new System.EventHandler(this.textBoxEvents_TextChanged);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -532,7 +575,6 @@
             this.tabMain.ResumeLayout(false);
             this.tabMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.selectedAlbumCover)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).EndInit();
             this.tabScheduleAPost.ResumeLayout(false);
             this.tabScheduleAPost.PerformLayout();
@@ -561,11 +603,10 @@
         private System.Windows.Forms.ListBox listBoxPosts;
         private System.Windows.Forms.Label labelAlbums;
         private System.Windows.Forms.Label labelPosts;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelEvents;
         private System.Windows.Forms.ListBox listBoxEvents;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelLikedPages;
         private System.Windows.Forms.ListBox listBoxLikes;
-        private System.Windows.Forms.PictureBox pictureBox1;
         internal System.Windows.Forms.PictureBox selectedAlbumCover;
         private System.Windows.Forms.TextBox selectedPostBox;
         private System.Windows.Forms.TabPage tabPage3;
@@ -583,6 +624,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn postPrivacyLevel;
         private System.Windows.Forms.DataGridViewTextBoxColumn postStatus;
         private System.Windows.Forms.Label labelWelcomePostScheduling;
+        private System.Windows.Forms.Button buttonSearch;
+        private System.Windows.Forms.TextBox textBoxSearch;
+        private System.Windows.Forms.TextBox textBoxPagesLikes;
+        private System.Windows.Forms.TextBox textBoxEvents;
     }
 }
 
