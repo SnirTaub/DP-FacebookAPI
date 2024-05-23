@@ -57,7 +57,7 @@ namespace BasicFacebookFeatures.Logic.ScheduledPost
             m_Timer.StopTimer();
             r_ScheduledPostsManager.RemoveScheduledPost(this.ScheduledPostId);
         }
-
+        
         protected virtual void Timer_Elapsed()
         {
             try

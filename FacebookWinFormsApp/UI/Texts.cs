@@ -18,5 +18,12 @@ The message of the post is: {1}";
         internal const string EditPost = "Please choose a post that is in pending status to edit";
         internal const string PostBody = "Post body";
         internal const string RemovePost = "Please choose a post to remove from the table above";
+        internal const string SearchPostBody = "Search post body...";
+        internal const string NoEventsFound = "No events were found";
+        internal const string NoPagesFound = "No Pages were found";
+        internal const string PageDetails = @"The page name is: {0},
+The description of the page is: {1}";
+        internal const string EventDetails = @"There are {0} attendence to this event,
+The description of the event is: {1}";
     }
 }

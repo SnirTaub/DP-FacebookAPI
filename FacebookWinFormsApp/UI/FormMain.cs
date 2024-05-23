@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using BasicFacebookFeatures.UI;
 using FacebookWrapper.ObjectModel;
@@ -19,6 +15,7 @@ namespace BasicFacebookFeatures
         private IList<Album> m_Albums;
         private ScheduledPostsManager m_ScheduledPostsManager;
         private IList<ScheduledPost> m_ScheduledPosts;
+      
         public FormMain()
         {
             InitializeComponent();
@@ -84,8 +81,8 @@ namespace BasicFacebookFeatures
             textBoxEmail.Text = m_LoggedInUser?.Email;
             textBoxBirthday.Text = m_LoggedInUser?.Birthday;
             textBoxCity.Text = m_LoggedInUser.Location?.Name;
-            
-            //selectedPagesLikesBox.Visible = true;
+            textBoxEvents.Visible = true;
+            textBoxPagesLikes.Visible = true;
             selectedPostBox.Visible = true;
             fetchAlbums();
             fetchLikes();
@@ -152,25 +149,47 @@ namespace BasicFacebookFeatures
         {
             listBoxLikes.Items.Clear();
             listBoxLikes.DisplayMember = Texts.Name;
-            listBoxLikes.DataSource = m_LoggedInUser.LikedPages;
+            foreach (Page page in m_LoggedInUser.LikedPages)
+            {
+                listBoxLikes.Items.Add(page);
+            }
+
+            if (listBoxLikes.Items.Count == 0)
+            {
+                labelLikedPages.Text = Texts.NoPagesFound;
+            }
         }
 
         private void fetchEvents()
         {
             listBoxEvents.Items.Clear();
-            listBoxEvents.DisplayMember = Texts.Name;
-            listBoxEvents.DataSource = m_LoggedInUser.EventsCreated;
+            foreach (Event facebookEvent in m_LoggedInUser.Events)
+            {
+                if (facebookEvent.Description != null)
+                {
+                    listBoxEvents.Items.Add(facebookEvent);
+                }
+
+                if (listBoxEvents.Items.Count == 25)
+                {
+                    break;
+                }
+            }
+
+            if (listBoxEvents.Items.Count == 0)
+            {
+                labelEvents.Text = Texts.NoEventsFound;
+            }
         }
 
-        private void listBoxLikes_SelectedIndexChanged(object sender, EventArgs e)
+        private void displaySelectedLikedPages()
         {
-            if (listBoxLikes.SelectedIndex != -1)
+            Page selectedPage;
+
+            if (listBoxLikes.SelectedItems.Count == 1)
             {
-                if (listBoxLikes.SelectedItems.Count == 1)
-                {
-                    Page selectedPage = (Page)listBoxLikes.SelectedItem;
-                    pictureBox1.Image = selectedPage.ImageNormal;
-                }
+                selectedPage = listBoxLikes.SelectedItem as Page;
+                textBoxPagesLikes.Text = string.Format(Texts.PageDetails, selectedPage.Name, selectedPage.Description);
             }
         }
 
@@ -188,10 +207,20 @@ namespace BasicFacebookFeatures
             }
         }
 
+        private void displaySelectedEvents()
+        {
+            Event selectedEvent;
+
+            if(listBoxEvents.SelectedItems.Count == 1)
+            {
+                selectedEvent = listBoxPosts.SelectedItem as Event;
+                selectedPostBox.Text = string.Format(Texts.EventDetails, selectedEvent?.AttendingCount, selectedEvent?.Description);
+            }
+        }
+
         private void displaySelectedPost()
         {
             Post selectedPost;
-
             if (listBoxPosts.SelectedItems.Count == 1)
             {
                 selectedPost = listBoxPosts.SelectedItem as Post;
@@ -207,6 +236,16 @@ namespace BasicFacebookFeatures
         private void listBoxPosts_SelectedIndexChanged(object sender, EventArgs e)
         {
             displaySelectedPost();
+        }
+
+        private void listBoxLikes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            displaySelectedLikedPages();
+        }
+
+        private void textBoxEvents_TextChanged(object sender, EventArgs e)
+        {
+            displaySelectedEvents();
         }
 
         private void enableSchedulePostFeature()
@@ -240,6 +279,8 @@ namespace BasicFacebookFeatures
                 buttonPublishedPosts.Visible = true;
                 buttonUnpublishedPosts.Visible = true;
                 buttonViewPostBody.Visible = true;
+                buttonSearch.Visible = true;
+                textBoxSearch.Visible = true;
             }
             else
             {
@@ -248,6 +289,8 @@ namespace BasicFacebookFeatures
                 buttonPublishedPosts.Visible = false;
                 buttonUnpublishedPosts.Visible = false;
                 buttonViewPostBody.Visible = false;
+                buttonSearch.Visible = false;
+                textBoxSearch.Visible = false;
             }
         }
 
@@ -351,6 +394,39 @@ namespace BasicFacebookFeatures
         {
             string postIdToChange = UiUtils.GetSelectedRow(dataGridPostScheduler).Cells["PostBody"].Value.ToString();
             MessageBox.Show(postIdToChange, Texts.PostBody);
+        }
+
+        private void textBoxSearch_Enter(object sender, EventArgs e)
+        {
+            if (textBoxSearch.ForeColor == Color.Gray)
+            {
+                textBoxSearch.Text = string.Empty;
+                textBoxSearch.ForeColor = Color.Black;
+            }
+        }
+
+        private void textBoxSearch_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBoxSearch.Text))
+            {
+                textBoxSearch.ForeColor = Color.Gray;
+                textBoxSearch.Text = Texts.SearchPostBody;
+            }
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            string searchText = textBoxSearch.Text;
+            IList<ScheduledPost> currentScheduledPosts = m_ScheduledPostsManager.GetScheduledPostsAsList();
+
+            dataGridPostScheduler.Rows.Clear();
+            foreach (ScheduledPost scheduledPost in currentScheduledPosts)
+            {
+                if (scheduledPost.PostBody.Contains(searchText))
+                {
+                    addRowToScheduledPostsGrid(scheduledPost);
+                }
+            }
         }
     }
 }
