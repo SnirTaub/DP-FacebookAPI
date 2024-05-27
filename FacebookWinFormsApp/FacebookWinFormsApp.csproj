@@ -89,6 +89,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logic\AgeCalculator.cs" />
+    <Compile Include="Logic\Genders.cs" />
+    <Compile Include="Logic\Team.cs" />
+    <Compile Include="Logic\TeamManager.cs" />
+    <Compile Include="Logic\TeamSettings.cs" />
     <Compile Include="UI\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
