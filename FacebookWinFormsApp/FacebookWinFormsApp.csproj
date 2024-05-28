@@ -90,7 +90,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logic\BuildTeam\AgeCalculator.cs" />
+    <Compile Include="Logic\AgeCalculator.cs" />
     <Compile Include="Logic\BuildTeam\Genders.cs" />
     <Compile Include="Logic\ScheduledPost\ePrivacy.cs" />
     <Compile Include="Logic\ScheduledPost\ScheduledPost.cs" />

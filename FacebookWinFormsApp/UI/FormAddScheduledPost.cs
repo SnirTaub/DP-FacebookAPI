@@ -9,6 +9,7 @@ namespace BasicFacebookFeatures.UI
     {
         protected readonly ScheduledPostsManager r_ScheduledPostsManager;
         protected readonly User r_LoggedInUser;
+
         public FormAddScheduledPost(ScheduledPostsManager i_ScheduledPostsManager, User i_LoggedInUser)
         {
             r_ScheduledPostsManager = i_ScheduledPostsManager;
@@ -20,7 +21,7 @@ namespace BasicFacebookFeatures.UI
         protected virtual void buttonPost_Click(object sender, EventArgs e)
         {
             DateTime postDate;
-            ePrivacyType privacyMode;
+            ePrivacyTypes privacyMode;
             string postBody = textBoxPostBody.Text;
 
             if (string.IsNullOrEmpty(postBody))
@@ -35,17 +36,17 @@ namespace BasicFacebookFeatures.UI
             Close();
         }
 
-        protected ePrivacyType GetPrivacy(string i_Privacy)
+        protected ePrivacyTypes GetPrivacy(string i_Privacy)
         {
-            ePrivacyType privacy = ePrivacyType.EVERYONE;
+            ePrivacyTypes privacy = ePrivacyTypes.EVERYONE;
 
             switch (i_Privacy)
             {
                 case "My friends":
-                    privacy = ePrivacyType.ALL_FRIENDS;
+                    privacy = ePrivacyTypes.ALL_FRIENDS;
                     break;
                 case "Me":
-                    privacy = ePrivacyType.SELF;
+                    privacy = ePrivacyTypes.SELF;
                     break;
             }
 

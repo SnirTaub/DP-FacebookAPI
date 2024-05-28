@@ -7,6 +7,7 @@ using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
 using BasicFacebookFeatures.Logic.ScheduledPost;
 using BasicFacebookFeatures.Logic.BuildTeam;
+using BasicFacebookFeatures.Logic;
 
 namespace BasicFacebookFeatures
 {
@@ -311,7 +312,7 @@ namespace BasicFacebookFeatures
             dataGridPostScheduler.Rows.Add(i_ScheduledPost.ScheduledPostId,
                 i_ScheduledPost.PostBody,
                 i_ScheduledPost.ScheduledPostTimeToUpload,
-                UiUtils.getPrivacyText(i_ScheduledPost.Privacy),
+                UiUtils.GetPrivacyText(i_ScheduledPost.Privacy),
                 postStatus);
         }
 
@@ -466,10 +467,12 @@ namespace BasicFacebookFeatures
                 Potential team members found are:",
                 teamManager.Name, genderStr, homeTownStr, ageFrom.ToString(), ageTo.ToString());
 
-            if (listBoxTeamMembers.Items.Count > 0)
+            listBoxTeamMembers.DisplayMember = null;
+
+            /*if (listBoxTeamMembers.Items.Count > 0)
             {
                 listBoxTeamMembers.Items.Clear();
-            }
+            }*/
 
             listBoxTeamMembers.DisplayMember = Texts.Name;
             listBoxTeamMembers.DataSource = m_TeamManager.GetTeamMembers(i_TeamName);
@@ -494,18 +497,43 @@ namespace BasicFacebookFeatures
 
         private void presentTeamMemberInfo(User i_TeamMember)
         {
-            int age = AgeCalculator.CalculateAge(DateTime.Parse(i_TeamMember.Birthday));
+            int age = AgeCalculator.CalculateAgeFromString(i_TeamMember.Birthday);
+            string name = i_TeamMember.Name != null ? i_TeamMember.Name : "Missing name";
+            Genders gender = new Genders(i_TeamMember.Gender);
+            string hometownName;
+            string birthDay = i_TeamMember.Birthday != null ? i_TeamMember.Birthday : "Missing birthday";
 
-            labelTeamPlayerInfo.Text = string.Format(@"{0}, {1}, From {2}.
-Birthday: {3} ({4} years old).", i_TeamMember.Name, i_TeamMember.Gender, i_TeamMember.Hometown.Name, i_TeamMember.Birthday, age.ToString());
+            if (i_TeamMember.Hometown != null && i_TeamMember.Hometown.Name != null)
+            {
+                hometownName = i_TeamMember.Hometown.Name;
+            }
+            else
+            {
+                hometownName = "Missing hometown";
+            }
+
+            labelTeamPlayerInfo.Text = string.Format(@"{0},
+{1},
+From {2}.
+Birthday: {3} ({4} years old).", name, gender, hometownName, birthDay, age.ToString());
 
             pictureBoxTeamMember.Image = i_TeamMember.ImageSmall;
+        }
+
+        private void clearInfoBoxes()
+        {
+            labelCreatedTeamTitle.Text = "Team Title";
+            labelCreatedTeamDescription.Text = "Team Description";
+            labelTeamPlayerInfo.Text = "Player Information";
+            pictureBoxTeamMember.Image = null;
         }
 
         private void enableBuildTeamFeature()
         {
             labelLoginRequiredMessage.Enabled = false;
             labelLoginRequiredMessage.Visible = false;
+            buttonRemoveTeamMember.Enabled = true;
+            buttonRemoveTeamMember.Visible = true;
             labelTeamBuildHeader.Enabled = true;
             labelTeamBuildHeader.Visible = true;
             labelTeamName.Enabled = true;
@@ -613,8 +641,12 @@ Birthday: {3} ({4} years old).", i_TeamMember.Name, i_TeamMember.Gender, i_TeamM
             {
                 User teamMember = listBoxTeamMembers.SelectedItem as User;
 
-                listBoxTeamMembers.Items.Remove(listBoxTeamMembers.SelectedItem);
                 m_TeamManager.RemoveTeamMember(m_TeamManager.SelectedTeamName, teamMember);
+
+                clearInfoBoxes();
+
+                listBoxTeamMembers.DataSource = null;
+                listBoxTeamMembers.DataSource = m_TeamManager.GetTeamMembers(m_TeamManager.SelectedTeamName);
             }
         }
 
@@ -622,8 +654,18 @@ Birthday: {3} ({4} years old).", i_TeamMember.Name, i_TeamMember.Gender, i_TeamM
         {
             if (listBoxTeams.SelectedIndex > -1)
             {
-                listBoxTeams.Items.Remove(listBoxTeams.SelectedItem);
-                m_TeamManager.RemoveTeam(listBoxTeams.SelectedItem.ToString());
+                string selectedTeam = listBoxTeams.SelectedItem.ToString();
+
+                if (m_TeamManager.SelectedTeamName == selectedTeam)
+                {
+                    listBoxTeamMembers.DataSource = null;
+                    clearInfoBoxes();
+                }
+
+                m_TeamManager.RemoveTeam(selectedTeam);
+
+                listBoxTeams.DataSource = null;
+                listBoxTeams.DataSource = m_TeamManager.Teams;
             }
         }
     }

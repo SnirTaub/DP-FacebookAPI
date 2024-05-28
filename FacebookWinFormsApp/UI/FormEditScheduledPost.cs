@@ -32,7 +32,7 @@ namespace BasicFacebookFeatures.UI
 
         protected override void buttonPost_Click(object sender, EventArgs e)
         {
-            ePrivacyType privacyMode;
+            ePrivacyTypes privacyMode;
             string postBody = textBoxPostBody.Text;
 
             if (string.IsNullOrEmpty(postBody))
