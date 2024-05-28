@@ -1,6 +1,6 @@
 ﻿namespace BasicFacebookFeatures.Logic.ScheduledPost
 {
-    internal enum ePrivacyType
+    internal enum ePrivacyTypes
     {
         SELF,
         EVERYONE,

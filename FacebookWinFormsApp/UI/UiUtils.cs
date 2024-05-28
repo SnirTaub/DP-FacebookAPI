@@ -11,16 +11,16 @@ namespace BasicFacebookFeatures.UI
             return i_DataGrid.Rows[selectedRowIndex];
         }
 
-        internal static string getPrivacyText(ePrivacyType i_Privacy)
+        internal static string GetPrivacyText(ePrivacyTypes i_Privacy)
         {
             string privacy = Texts.Everyone;
 
             switch (i_Privacy)
             {
-                case ePrivacyType.ALL_FRIENDS:
+                case ePrivacyTypes.ALL_FRIENDS:
                     privacy = Texts.MyFriends;
                     break;
-                case ePrivacyType.SELF:
+                case ePrivacyTypes.SELF:
                     privacy = Texts.Me;
                     break;
             }

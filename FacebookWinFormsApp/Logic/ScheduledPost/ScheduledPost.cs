@@ -11,7 +11,7 @@ namespace BasicFacebookFeatures.Logic.ScheduledPost
         private TimerEngine m_Timer;
         internal string PostBody { get; set; }
         internal bool IsPosted { get; set; } = false;
-        internal ePrivacyType Privacy { get; set; }
+        internal ePrivacyTypes Privacy { get; set; }
         internal DateTime ScheduledPostTimeToUpload { get; }
         internal int ScheduledPostId { get; }
         public event Action PostShared;
@@ -20,7 +20,7 @@ namespace BasicFacebookFeatures.Logic.ScheduledPost
             DateTime i_ScheduledPostTimeToUpload,
             ScheduledPostsManager i_ScheduledPostsManager,
             User i_LoggedInUser,
-            ePrivacyType i_Privacy)
+            ePrivacyTypes i_Privacy)
         {
             PostBody = i_CurrentScheduledPost;
             ScheduledPostTimeToUpload = i_ScheduledPostTimeToUpload;

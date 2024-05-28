@@ -33,7 +33,7 @@ namespace BasicFacebookFeatures.Logic.ScheduledPost
             return r_Posts.Values.ToList();
         }
 
-        internal void EditScheduledPost(int i_PostId, string i_PostBody, ePrivacyType i_Privacy)
+        internal void EditScheduledPost(int i_PostId, string i_PostBody, ePrivacyTypes i_Privacy)
         {
             r_Posts[i_PostId].PostBody = i_PostBody;
             r_Posts[i_PostId].Privacy = i_Privacy;

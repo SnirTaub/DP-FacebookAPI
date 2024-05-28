@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.buttonLogout = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabMain = new System.Windows.Forms.TabPage();
+            this.textBoxEvents = new System.Windows.Forms.TextBox();
             this.textBoxPagesLikes = new System.Windows.Forms.TextBox();
             this.selectedPostBox = new System.Windows.Forms.TextBox();
             this.selectedAlbumCover = new System.Windows.Forms.PictureBox();
@@ -71,7 +71,6 @@
             this.postPrivacyLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.postStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelWelcomePostScheduling = new System.Windows.Forms.Label();
-            this.textBoxEvents = new System.Windows.Forms.TextBox();
             this.tabBuildTeam = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.textBoxTeamPurpose = new System.Windows.Forms.TextBox();
@@ -101,6 +100,12 @@
             this.buttonRemoveTeam = new System.Windows.Forms.Button();
             this.labelTeams = new System.Windows.Forms.Label();
             this.listBoxTeams = new System.Windows.Forms.ListBox();
+            this.tabControl1.SuspendLayout();
+            this.tabMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.selectedAlbumCover)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
+            this.tabScheduleAPost.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPostScheduler)).BeginInit();
             this.tabBuildTeam.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -111,12 +116,6 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTeamMember)).BeginInit();
-            this.tabControl1.SuspendLayout();
-            this.tabMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.selectedAlbumCover)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
-            this.tabScheduleAPost.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridPostScheduler)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonLogin
@@ -159,8 +158,8 @@
             this.tabControl1.Controls.Add(this.tabScheduleAPost);
             this.tabControl1.Controls.Add(this.tabBuildTeam);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1243, 697);
@@ -198,6 +197,17 @@
             this.tabMain.TabIndex = 0;
             this.tabMain.Text = "Main";
             this.tabMain.UseVisualStyleBackColor = true;
+            // 
+            // textBoxEvents
+            // 
+            this.textBoxEvents.Location = new System.Drawing.Point(1052, 475);
+            this.textBoxEvents.Multiline = true;
+            this.textBoxEvents.Name = "textBoxEvents";
+            this.textBoxEvents.Size = new System.Drawing.Size(159, 148);
+            this.textBoxEvents.TabIndex = 74;
+            this.textBoxEvents.Text = "choose an event";
+            this.textBoxEvents.Visible = false;
+            this.textBoxEvents.TextChanged += new System.EventHandler(this.textBoxEvents_TextChanged);
             // 
             // textBoxPagesLikes
             // 
@@ -499,13 +509,13 @@
             this.dataGridPostScheduler.AllowUserToAddRows = false;
             this.dataGridPostScheduler.AllowUserToDeleteRows = false;
             this.dataGridPostScheduler.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridPostScheduler.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridPostScheduler.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridPostScheduler.BackgroundColor = System.Drawing.Color.PapayaWhip;
             this.dataGridPostScheduler.ColumnHeadersHeight = 58;
             this.dataGridPostScheduler.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
@@ -578,6 +588,7 @@
             this.labelWelcomePostScheduling.Size = new System.Drawing.Size(416, 31);
             this.labelWelcomePostScheduling.TabIndex = 3;
             this.labelWelcomePostScheduling.Text = "Please login to perform actions";
+            // 
             // tabBuildTeam
             // 
             this.tabBuildTeam.Controls.Add(this.splitContainer1);
@@ -1173,17 +1184,6 @@
             this.listBoxTeams.Visible = false;
             this.listBoxTeams.SelectedIndexChanged += new System.EventHandler(this.listBoxTeams_SelectedIndexChanged);
             // 
-            // textBoxEvents
-            // 
-            this.textBoxEvents.Location = new System.Drawing.Point(1052, 475);
-            this.textBoxEvents.Multiline = true;
-            this.textBoxEvents.Name = "textBoxEvents";
-            this.textBoxEvents.Size = new System.Drawing.Size(159, 148);
-            this.textBoxEvents.TabIndex = 74;
-            this.textBoxEvents.Text = "choose an event";
-            this.textBoxEvents.Visible = false;
-            this.textBoxEvents.TextChanged += new System.EventHandler(this.textBoxEvents_TextChanged);
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -1218,6 +1218,7 @@
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTeamMember)).EndInit();
             this.ResumeLayout(false);
+
         }
 
 		#endregion
