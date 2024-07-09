@@ -7,7 +7,6 @@ namespace BasicFacebookFeatures.Logic.ScheduledPost
     {
         private static int s_Id = 1;
         private readonly ProxyUser r_LoggedInUser;
-        private readonly FacadeScheduledPosts r_ScheduledPostsManager;
         private TimerEngine m_Timer;
         internal string PostBody { get; set; }
         internal bool IsPosted { get; set; } = false;
