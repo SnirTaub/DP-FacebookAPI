@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
 
-namespace BasicFacebookFeatures.Logic
+namespace BasicFacebookFeatures.Logic.BuildTeam
 {
     public class TeamSettings
     {

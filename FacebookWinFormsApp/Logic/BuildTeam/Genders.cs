@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
 
-namespace BasicFacebookFeatures.Logic
+namespace BasicFacebookFeatures.Logic.BuildTeam
 {
     public class Genders
     {
@@ -39,7 +39,7 @@ namespace BasicFacebookFeatures.Logic
                     gender = new Genders(User.eGender.male);
                     break;
                 case "all":
-                    gender = null;
+                    gender = new Genders(null);
                     break;
                 default:
                     throw new FormatException();

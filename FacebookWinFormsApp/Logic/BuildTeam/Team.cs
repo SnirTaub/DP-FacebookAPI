@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
 
-namespace BasicFacebookFeatures.Logic
+namespace BasicFacebookFeatures.Logic.BuildTeam
 {
     internal class Team
     {
@@ -148,7 +148,8 @@ namespace BasicFacebookFeatures.Logic
 
         private bool isRequiredGender(User i_PotentialTeamMember, Genders i_Gender)
         {
-            return !i_Gender.Gender.HasValue ||
+            return i_Gender == null ||
+                !i_Gender.Gender.HasValue ||
                 i_PotentialTeamMember.Gender.HasValue && i_PotentialTeamMember.Gender.Value == i_Gender.Gender.Value;
         }
 
@@ -157,15 +158,9 @@ namespace BasicFacebookFeatures.Logic
             int ageFrom = i_AgeFrom <= i_AgeTo ? i_AgeFrom : i_AgeTo;
             int ageTo = i_AgeTo > i_AgeFrom ? i_AgeTo : i_AgeFrom;
 
-            DateTime potentialTeamMemberDate = DateTime.Parse(i_PotentialTeamMember.Birthday);
+            int potentialTeamMemberAge = AgeCalculator.CalculateAgeFromString(i_PotentialTeamMember.Birthday);
 
-            int yearFrom = DateTime.Now.Year - ageTo;
-            int yearTo = DateTime.Now.Year - ageFrom;
-
-            DateTime dateFrom = new DateTime(yearFrom, DateTime.Now.Month, DateTime.Now.Day);
-            DateTime dateTo = new DateTime(yearTo, DateTime.Now.Month, DateTime.Now.Day);
-
-            return potentialTeamMemberDate >= dateFrom && potentialTeamMemberDate <= dateTo;
+            return AgeCalculator.IsInRange(ageFrom, ageTo, potentialTeamMemberAge);
         }
 
         private bool isFromHometown(User i_PotentialTeamMember)

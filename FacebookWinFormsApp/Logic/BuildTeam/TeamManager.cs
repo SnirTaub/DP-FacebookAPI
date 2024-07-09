@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
 
-namespace BasicFacebookFeatures.Logic
+namespace BasicFacebookFeatures.Logic.BuildTeam
 {
     public class TeamManager
     {
@@ -17,6 +17,21 @@ namespace BasicFacebookFeatures.Logic
         {
             r_Teams = new Dictionary<string, Team>();
             m_SelectedTeam = null;
+        }
+
+        public List<string> Teams
+        {
+            get
+            {
+                List<string> teams = new List<string>();
+
+                foreach (KeyValuePair<string, Team> team in r_Teams)
+                {
+                    teams.Add(team.Key);
+                }
+
+                return teams;
+            }
         }
 
         public string SelectedTeamName
