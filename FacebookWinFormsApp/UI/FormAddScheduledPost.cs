@@ -1,18 +1,18 @@
 ﻿using System;
+using BasicFacebookFeatures.Logic;
 using BasicFacebookFeatures.Logic.ScheduledPost;
-using FacebookWrapper.ObjectModel;
 using System.Windows.Forms;
 
 namespace BasicFacebookFeatures.UI
 {
     internal partial class FormAddScheduledPost : Form
     {
-        protected readonly ScheduledPostsManager r_ScheduledPostsManager;
-        protected readonly User r_LoggedInUser;
+        protected readonly FacadeScheduledPosts r_FacadeScheduledPosts;
+        protected readonly ProxyUser r_LoggedInUser;
 
-        public FormAddScheduledPost(ScheduledPostsManager i_ScheduledPostsManager, User i_LoggedInUser)
+        public FormAddScheduledPost(ProxyUser i_LoggedInUser)
         {
-            r_ScheduledPostsManager = i_ScheduledPostsManager;
+            r_FacadeScheduledPosts = Singleton<FacadeScheduledPosts>.Instance;
             r_LoggedInUser = i_LoggedInUser;
             InitializeComponent();
             dateTimePicker.MinDate = DateTime.Now.AddMinutes(1);
@@ -32,7 +32,7 @@ namespace BasicFacebookFeatures.UI
 
             postDate = dateTimePicker.Value;
             privacyMode = GetPrivacy(comboBoxPrivacy.Text);
-            new ScheduledPost(postBody, postDate, r_ScheduledPostsManager, r_LoggedInUser, privacyMode);
+            r_FacadeScheduledPosts.CreateScheduledPost(postBody, postDate, r_LoggedInUser, privacyMode);
             Close();
         }
 

@@ -1,6 +1,5 @@
-﻿using BasicFacebookFeatures.Logic.ScheduledPost;
-using BasicFacebookFeatures.UI;
-using FacebookWrapper.ObjectModel;
+﻿using BasicFacebookFeatures.Logic;
+using BasicFacebookFeatures.Logic.ScheduledPost;
 using System;
 using System.Windows.Forms;
 
@@ -11,10 +10,9 @@ namespace BasicFacebookFeatures.UI
         private readonly DataGridView r_ScheduledPostDataGrid;
         public int PostId { get; }
 
-        public FormEditScheduledPost(ScheduledPostsManager i_ScheduledPostManager,
-            User i_LoggedInUser,
+        public FormEditScheduledPost(ProxyUser i_LoggedInUser,
             int i_PostId,
-            DataGridView i_ScheduledPostDataGrid) : base(i_ScheduledPostManager, i_LoggedInUser)
+            DataGridView i_ScheduledPostDataGrid) : base(i_LoggedInUser)
         {
             PostId = i_PostId;
             r_ScheduledPostDataGrid = i_ScheduledPostDataGrid;
@@ -42,7 +40,7 @@ namespace BasicFacebookFeatures.UI
             }
 
             privacyMode = GetPrivacy(comboBoxPrivacy.Text);
-            r_ScheduledPostsManager.EditScheduledPost(PostId, postBody, privacyMode);
+            r_FacadeScheduledPosts.EditScheduledPost(PostId, postBody, privacyMode);
             Close();
         }
     }

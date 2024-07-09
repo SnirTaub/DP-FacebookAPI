@@ -92,12 +92,14 @@
   <ItemGroup>
     <Compile Include="Logic\AgeCalculator.cs" />
     <Compile Include="Logic\BuildTeam\Genders.cs" />
+    <Compile Include="Logic\ProxyUser.cs" />
     <Compile Include="Logic\ScheduledPost\ePrivacy.cs" />
     <Compile Include="Logic\ScheduledPost\ScheduledPost.cs" />
-    <Compile Include="Logic\ScheduledPost\ScheduledPostsManager.cs" />
+    <Compile Include="Logic\ScheduledPost\FacadeScheduledPosts.cs" />
     <Compile Include="Logic\BuildTeam\Team.cs" />
     <Compile Include="Logic\BuildTeam\TeamManager.cs" />
     <Compile Include="Logic\BuildTeam\TeamSettings.cs" />
+    <Compile Include="Logic\Singleton.cs" />
     <Compile Include="Logic\TimerEngine.cs" />
     <Compile Include="UI\FormAddScheduledPost.cs">
       <SubType>Form</SubType>

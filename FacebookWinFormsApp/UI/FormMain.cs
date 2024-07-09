@@ -13,10 +13,10 @@ namespace BasicFacebookFeatures
 {
     public partial class FormMain : Form
     {
-        private User m_LoggedInUser;
+        private ProxyUser m_LoggedInUser;
+        private LoginResult m_LoginResult;
         private IList<Album> m_Albums;
-        private ScheduledPostsManager m_ScheduledPostsManager;
-        private IList<ScheduledPost> m_ScheduledPosts;
+        private FacadeScheduledPosts m_FacadeScheduledPosts = Singleton<FacadeScheduledPosts>.Instance;
         private TeamManager m_TeamManager;
 
         public FormMain()
@@ -25,8 +25,6 @@ namespace BasicFacebookFeatures
             FacebookWrapper.FacebookService.s_CollectionLimit = 25;
             m_TeamManager = new TeamManager();
         }
-
-        FacebookWrapper.LoginResult m_LoginResult;
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
@@ -56,7 +54,6 @@ namespace BasicFacebookFeatures
                 "user_friends"
                 );
 
-            m_ScheduledPostsManager = new ScheduledPostsManager();
             if (string.IsNullOrEmpty(m_LoginResult.ErrorMessage))
             {
                 buttonLogin.Text = $"Logged in as {m_LoginResult.LoggedInUser.Name}";
@@ -64,12 +61,11 @@ namespace BasicFacebookFeatures
                 pictureBoxProfile.ImageLocation = m_LoginResult.LoggedInUser.PictureNormalURL;
                 buttonLogin.Enabled = false;
                 buttonLogout.Enabled = true;
-                m_LoggedInUser = m_LoginResult.LoggedInUser;
+                m_LoggedInUser = new ProxyUser(m_LoginResult.LoggedInUser);
                 fetchUserInfo();
                 enableSchedulePostFeature();
                 enableBuildTeamFeature();
             }
-
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
