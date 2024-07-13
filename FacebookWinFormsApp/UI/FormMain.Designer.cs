@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.buttonLogout = new System.Windows.Forms.Button();
@@ -100,6 +101,9 @@
             this.buttonRemoveTeam = new System.Windows.Forms.Button();
             this.labelTeams = new System.Windows.Forms.Label();
             this.listBoxTeams = new System.Windows.Forms.ListBox();
+            this.bindingSourceUser = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSourceCity = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tabMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.selectedAlbumCover)).BeginInit();
@@ -116,6 +120,9 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTeamMember)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceCity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonLogin
@@ -1115,10 +1122,10 @@
             this.labelCreatedTeamHeader.AutoSize = true;
             this.labelCreatedTeamHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelCreatedTeamHeader.Enabled = false;
-            this.labelCreatedTeamHeader.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCreatedTeamHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCreatedTeamHeader.Location = new System.Drawing.Point(0, 0);
             this.labelCreatedTeamHeader.Name = "labelCreatedTeamHeader";
-            this.labelCreatedTeamHeader.Size = new System.Drawing.Size(137, 31);
+            this.labelCreatedTeamHeader.Size = new System.Drawing.Size(165, 31);
             this.labelCreatedTeamHeader.TabIndex = 0;
             this.labelCreatedTeamHeader.Text = "Your Team:";
             this.labelCreatedTeamHeader.Visible = false;
@@ -1127,10 +1134,10 @@
             // 
             this.labelCreatedTeamTitle.AutoSize = true;
             this.labelCreatedTeamTitle.Enabled = false;
-            this.labelCreatedTeamTitle.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCreatedTeamTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCreatedTeamTitle.Location = new System.Drawing.Point(7, 85);
             this.labelCreatedTeamTitle.Name = "labelCreatedTeamTitle";
-            this.labelCreatedTeamTitle.Size = new System.Drawing.Size(100, 25);
+            this.labelCreatedTeamTitle.Size = new System.Drawing.Size(123, 25);
             this.labelCreatedTeamTitle.TabIndex = 1;
             this.labelCreatedTeamTitle.Text = "Team Title";
             this.labelCreatedTeamTitle.Visible = false;
@@ -1164,10 +1171,10 @@
             // 
             this.labelTeams.AutoSize = true;
             this.labelTeams.Enabled = false;
-            this.labelTeams.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Bold);
+            this.labelTeams.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold);
             this.labelTeams.Location = new System.Drawing.Point(57, 41);
             this.labelTeams.Name = "labelTeams";
-            this.labelTeams.Size = new System.Drawing.Size(96, 25);
+            this.labelTeams.Size = new System.Drawing.Size(116, 25);
             this.labelTeams.TabIndex = 0;
             this.labelTeams.Text = "All teams:";
             this.labelTeams.Visible = false;
@@ -1183,6 +1190,14 @@
             this.listBoxTeams.TabIndex = 1;
             this.listBoxTeams.Visible = false;
             this.listBoxTeams.SelectedIndexChanged += new System.EventHandler(this.listBoxTeams_SelectedIndexChanged);
+            // 
+            // bindingSourceUser
+            // 
+            this.bindingSourceUser.DataSource = typeof(FacebookWrapper.ObjectModel.User);
+            // 
+            // bindingSourceCity
+            // 
+            this.bindingSourceCity.DataSource = typeof(FacebookWrapper.ObjectModel.City);
             // 
             // FormMain
             // 
@@ -1217,6 +1232,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTeamMember)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceCity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1294,6 +1312,9 @@
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.TextBox textBoxPagesLikes;
         private System.Windows.Forms.TextBox textBoxEvents;
+        private System.Windows.Forms.BindingSource bindingSourceUser;
+        private System.Windows.Forms.BindingSource bindingSourceCity;
+        private System.Windows.Forms.BindingSource bindingSource3;
     }
 }
 

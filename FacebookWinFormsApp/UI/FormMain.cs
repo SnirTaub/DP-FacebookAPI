@@ -8,6 +8,7 @@ using FacebookWrapper;
 using BasicFacebookFeatures.Logic.ScheduledPost;
 using BasicFacebookFeatures.Logic.BuildTeam;
 using BasicFacebookFeatures.Logic;
+using System.Threading;
 
 namespace BasicFacebookFeatures
 {
@@ -58,7 +59,6 @@ namespace BasicFacebookFeatures
             {
                 buttonLogin.Text = $"Logged in as {m_LoginResult.LoggedInUser.Name}";
                 buttonLogin.BackColor = Color.LightGreen;
-                pictureBoxProfile.ImageLocation = m_LoginResult.LoggedInUser.PictureNormalURL;
                 buttonLogin.Enabled = false;
                 buttonLogout.Enabled = true;
                 m_LoggedInUser = new ProxyUser(m_LoginResult.LoggedInUser);
@@ -80,96 +80,84 @@ namespace BasicFacebookFeatures
 
         private void fetchUserInfo()
         {
-            textBoxEmail.Text = m_LoggedInUser?.Email;
-            textBoxBirthday.Text = m_LoggedInUser?.Birthday;
-            textBoxCity.Text = m_LoggedInUser.Location?.Name;
-            textBoxEvents.Visible = true;
+            bindingSourceUser.DataSource = m_LoggedInUser;
+            bindingSourceCity.DataSource = new City();
+            pictureBoxProfile.LoadAsync(m_LoggedInUser.PictureNormalURL);
             textBoxPagesLikes.Visible = true;
             selectedPostBox.Visible = true;
-            fetchAlbums();
-            fetchLikes();
-            fetchPosts();
-            fetchEvents();
+            new Thread(fetchAlbums).Start();
+            new Thread(fetchPosts).Start();
+            new Thread(fetchLikes).Start();
+            new Thread(fetchEvents).Start();
         }
         
         private void fetchAlbums()
         {
-            listBoxAlbums.Items.Clear();
-            listBoxAlbums.DisplayMember = Texts.Name;
+            listBoxAlbums.Invoke(new Action(() => listBoxAlbums.Items.Clear()));
+            listBoxAlbums.Invoke(new Action(() => listBoxAlbums.DisplayMember = Texts.Name));
             m_Albums = m_LoggedInUser.Albums;
             foreach (Album album in m_Albums)
             {
-                listBoxAlbums.Items.Add(album);
+                if (album.Name != null)
+                {
+                    listBoxAlbums.Invoke(new Action(() => listBoxAlbums.Items.Add(album)));
+                }
+                else
+                {
+                    listBoxAlbums.Invoke(new Action(() => listBoxAlbums.Items.Add("dummy album")));
+                }
+
                 if (listBoxAlbums.Items.Count == 25)
                 {
                     break;
                 }
             }
-
-            if (listBoxAlbums.Items.Count == 0)
-            {
-                labelAlbums.Text = Texts.NoAlbumsFound;
-            }
         }
 
         private void fetchPosts()
         {
-            listBoxPosts.Items.Clear();
-            try
+            listBoxPosts.Invoke(new Action(() => listBoxPosts.Items.Clear()));
+            foreach (Post post in m_LoggedInUser.Posts)
             {
-                foreach (Post post in m_LoggedInUser.Posts)
+                if (post.Message != null || post.Caption != null)
                 {
-                    if (post.Message != null)
-                    {
-                        listBoxPosts.Items.Add(post);
-                    }
-                    else if (post.Caption != null) 
-                    {
-                        listBoxPosts.Items.Add(post);
-                    }
-
-                    if (listBoxPosts.Items.Count == 25)
-                    {
-                        break;
-                    }
+                    listBoxPosts.Invoke(new Action(() => listBoxPosts.Items.Add(post)));
+                }
+                else if (m_LoggedInUser.Posts.Count == 1)
+                {
+                    listBoxPosts.Invoke(new Action(() => listBoxPosts.Items.Add("dummy post")));
                 }
 
-                if (listBoxPosts.Items.Count == 0)
+                if (listBoxPosts.Items.Count == 25)
                 {
-                    labelPosts.Text = Texts.NoPostsFound;
+                    break;
                 }
-            }
-            catch
-            {
-                listBoxPosts.Items.Add("First post");
-                listBoxPosts.Items.Add("Second post");
-                listBoxPosts.Items.Add("Third post");
             }
         }
 
         private void fetchLikes()
         {
-            listBoxLikes.Items.Clear();
-            listBoxLikes.DisplayMember = Texts.Name;
+            listBoxLikes.Invoke(new Action(() => listBoxLikes.Items.Clear()));
+            listBoxLikes.Invoke(new Action(() => listBoxLikes.DisplayMember = Texts.Name));
             foreach (Page page in m_LoggedInUser.LikedPages)
             {
-                listBoxLikes.Items.Add(page);
+                listBoxLikes.Invoke(new Action(() => listBoxLikes.Items.Add(page)));
             }
 
             if (listBoxLikes.Items.Count == 0)
             {
-                labelLikedPages.Text = Texts.NoPagesFound;
+                labelLikedPages.Invoke(new Action(() => labelLikedPages.Text = Texts.NoPagesFound));
             }
         }
 
         private void fetchEvents()
         {
-            listBoxEvents.Items.Clear();
+            listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Clear()));
             foreach (Event facebookEvent in m_LoggedInUser.Events)
             {
                 if (facebookEvent.Description != null)
                 {
-                    listBoxEvents.Items.Add(facebookEvent);
+                    listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Add(facebookEvent)));
                 }
 
                 if (listBoxEvents.Items.Count == 25)
@@ -180,7 +168,7 @@ namespace BasicFacebookFeatures
 
             if (listBoxEvents.Items.Count == 0)
             {
-                labelEvents.Text = Texts.NoEventsFound;
+                labelEvents.Invoke(new Action(() => labelEvents.Text = Texts.NoEventsFound));
             }
         }
 
@@ -266,8 +254,7 @@ namespace BasicFacebookFeatures
         private void fetchScheduledPosts()
         {
             dataGridPostScheduler.Rows.Clear();
-            m_ScheduledPosts = m_ScheduledPostsManager.GetScheduledPostsAsList();
-            foreach (ScheduledPost scheduledPost in m_ScheduledPosts)
+            foreach (ScheduledPost scheduledPost in m_FacadeScheduledPosts.GetScheduledPostsAsList())
             {
                 addRowToScheduledPostsGrid(scheduledPost);
                 scheduledPost.PostShared += scheduledPostPosted;
@@ -319,7 +306,7 @@ namespace BasicFacebookFeatures
 
         private void buttonAddSchedulePost_Click(object sender, EventArgs e)
         {
-            FormAddScheduledPost scheduledPostForm = new FormAddScheduledPost(m_ScheduledPostsManager, m_LoggedInUser);
+            FormAddScheduledPost scheduledPostForm = new FormAddScheduledPost(m_LoggedInUser);
             scheduledPostForm.ShowDialog();
             fetchScheduledPosts();
         }
@@ -329,10 +316,9 @@ namespace BasicFacebookFeatures
             ScheduledPost postToRemove;
             int postIdToChange = int.Parse(UiUtils.GetSelectedRow(dataGridPostScheduler).Cells["PostId"].Value.ToString());
 
-            if (m_ScheduledPostsManager.IsPostContained(postIdToChange))
+            if (m_FacadeScheduledPosts.IsPostContained(postIdToChange))
             {
-                postToRemove = m_ScheduledPostsManager.GetPostById(postIdToChange);
-                postToRemove.RemovePostFromList();
+                m_FacadeScheduledPosts.RemoveScheduledPost(postIdToChange);
                 fetchScheduledPosts();
             }
             else
@@ -348,29 +334,19 @@ namespace BasicFacebookFeatures
 
         private void buttonPublishedPosts_Click(object sender, EventArgs e)
         {
-            IList<ScheduledPost> currentScheduledPosts = m_ScheduledPostsManager.GetScheduledPostsAsList();
-
             dataGridPostScheduler.Rows.Clear();
-            foreach (ScheduledPost scheduledPost in currentScheduledPosts)
+            foreach (ScheduledPost schedulePost in m_FacadeScheduledPosts.GetPublishedScheduledPostsAsList())
             {
-                if (scheduledPost.IsPosted == true)
-                {
-                    addRowToScheduledPostsGrid(scheduledPost);
-                }
+                addRowToScheduledPostsGrid(schedulePost);
             }
         }
 
         private void buttonUnpublishedPosts_Click(object sender, EventArgs e)
         {
-            IList<ScheduledPost> currentScheduledPosts = m_ScheduledPostsManager.GetScheduledPostsAsList();
-
             dataGridPostScheduler.Rows.Clear();
-            foreach (ScheduledPost scheduledPost in currentScheduledPosts)
+            foreach (ScheduledPost schedulePost in m_FacadeScheduledPosts.GetUnpublishedScheduledPostsAsList())
             {
-                if (scheduledPost.IsPosted == false)
-                {
-                    addRowToScheduledPostsGrid(scheduledPost);
-                }
+                addRowToScheduledPostsGrid(schedulePost);
             }
         }
 
@@ -379,10 +355,10 @@ namespace BasicFacebookFeatures
             FormEditScheduledPost scheduledPostForm;
             int postIdToChange = int.Parse(UiUtils.GetSelectedRow(dataGridPostScheduler).Cells["postId"].Value.ToString());
 
-            if (m_ScheduledPostsManager.IsPostContained(postIdToChange) &&
-                !m_ScheduledPostsManager.GetPostById(postIdToChange).IsPosted)
+            if (m_FacadeScheduledPosts.IsPostContained(postIdToChange) &&
+                !m_FacadeScheduledPosts.GetPostById(postIdToChange).IsPosted)
             {
-                scheduledPostForm = new FormEditScheduledPost(m_ScheduledPostsManager, m_LoggedInUser, postIdToChange, dataGridPostScheduler);
+                scheduledPostForm = new FormEditScheduledPost(m_LoggedInUser, postIdToChange, dataGridPostScheduler);
                 scheduledPostForm.ShowDialog();
                 fetchScheduledPosts();
             }
@@ -419,7 +395,7 @@ namespace BasicFacebookFeatures
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             string searchText = textBoxSearch.Text;
-            IList<ScheduledPost> currentScheduledPosts = m_ScheduledPostsManager.GetScheduledPostsAsList();
+            IList<ScheduledPost> currentScheduledPosts = m_FacadeScheduledPosts.GetScheduledPostsAsList();
 
             dataGridPostScheduler.Rows.Clear();
             foreach (ScheduledPost scheduledPost in currentScheduledPosts)
