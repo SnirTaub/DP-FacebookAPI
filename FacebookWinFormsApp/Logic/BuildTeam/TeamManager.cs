@@ -52,13 +52,13 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
             }
         }
 
-        public bool BuildTeam(TeamSettings i_TeamSettings)
+        public bool BuildTeam(TeamSettings i_TeamSettings, List<ITeamBuildingStrategy> i_Strategies) // changed
         {
             bool isTeamBuilt = false;
 
             if (!r_Teams.ContainsKey(i_TeamSettings.TeamName))
             {
-                m_SelectedTeam = Team.BuildTeam(i_TeamSettings);
+                m_SelectedTeam = Team.BuildTeam(i_TeamSettings, i_Strategies);
                 r_Teams.Add(i_TeamSettings.TeamName, m_SelectedTeam);
                 isTeamBuilt = true;
             }

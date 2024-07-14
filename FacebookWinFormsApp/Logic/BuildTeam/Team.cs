@@ -10,13 +10,15 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
 {
     internal class Team
     {
-        readonly private FacebookObjectCollection<User> r_TeamMembers;
+        private readonly FacebookObjectCollection<User> r_TeamMembers;
+        private readonly List<ITeamBuildingStrategy> r_Strategies; // changed
         private TeamSettings m_TeamSettings;
 
-        private Team(TeamSettings i_TeamSettings)
+        private Team(TeamSettings i_TeamSettings, List<ITeamBuildingStrategy> i_Strategies) // changed
         {
             r_TeamMembers = new FacebookObjectCollection<User>();
             m_TeamSettings = i_TeamSettings;
+            r_Strategies = i_Strategies;
         }
 
         public FacebookObjectCollection<User> TeamMembers
@@ -91,9 +93,9 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
             }
         }
 
-        internal static Team BuildTeam(TeamSettings i_TeamSettings)
+        internal static Team BuildTeam(TeamSettings i_TeamSettings, List<ITeamBuildingStrategy> i_Strategies) // changed
         {
-            Team team = new Team(i_TeamSettings);
+            Team team = new Team(i_TeamSettings, i_Strategies);
 
             FacebookObjectCollection<User> potentialTeamMembers = team.fetchAllFriends();
             team.filterTeamMembers(potentialTeamMembers, i_TeamSettings);
@@ -113,14 +115,14 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
             return friends;
         }
 
-        private void filterTeamMembers(FacebookObjectCollection<User> i_PotentialTeamMembers, TeamSettings i_TeamSettings)
+        private void filterTeamMembers(FacebookObjectCollection<User> i_PotentialTeamMembers, TeamSettings i_TeamSettings) // changed
         {
             int size = 0;
 
             foreach (User potentialTeamMember in i_PotentialTeamMembers)
             {
                 if (size < i_TeamSettings.TeamSize &&
-                    isValidTeamMember(potentialTeamMember, i_TeamSettings.AgeFrom, i_TeamSettings.AgeTo, i_TeamSettings.Gender, i_TeamSettings.FromHometown))
+                    isValidTeamMember(potentialTeamMember))
                 {
                     r_TeamMembers.Add(potentialTeamMember);
                     size++;
@@ -132,7 +134,23 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
             }
         }
 
-        private bool isValidTeamMember(User i_PotentialTeamMember, int i_AgeFrom, int i_AgeTo, Genders i_Gender, bool i_FromHometown)
+        private bool isValidTeamMember(User i_PotentialTeamMember) // changed
+        {
+            bool isValidTeamMember = true;
+
+            foreach (ITeamBuildingStrategy strategy in r_Strategies)
+            {
+                if (!strategy.IsValidTeamMember(i_PotentialTeamMember, m_TeamSettings))
+                {
+                    isValidTeamMember = false;
+                    break;
+                }
+            }
+
+            return isValidTeamMember;
+        }
+
+        /*private bool isValidTeamMember(User i_PotentialTeamMember, int i_AgeFrom, int i_AgeTo, Genders i_Gender, bool i_FromHometown)
         {
             bool isValidLocation = true;
 
@@ -166,6 +184,6 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
         private bool isFromHometown(User i_PotentialTeamMember)
         {
             return m_TeamSettings.TeamManager.Hometown == i_PotentialTeamMember.Hometown;
-        }
+        }*/
     }
 }
