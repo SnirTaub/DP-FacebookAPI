@@ -9,7 +9,7 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
 {
     class HometownStrategy : ITeamBuildingStrategy
     {
-        public bool IsValidTeamMember(User i_PotentialTeamMember, TeamSettings i_TeamSettings)
+        public bool IsValidTeamMember(ProxyUser i_PotentialTeamMember, TeamSettings i_TeamSettings)
         {
             return i_TeamSettings.TeamManager.Hometown == i_PotentialTeamMember.Hometown;
         }

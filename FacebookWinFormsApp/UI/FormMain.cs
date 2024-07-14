@@ -407,7 +407,7 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private bool buildTeam()
+        private bool buildTeam() // changed
         {
             bool isTeamBuilt;
             bool fromHometown = checkBoxNearMe.Checked;
@@ -417,14 +417,31 @@ namespace BasicFacebookFeatures
                 int.Parse(comboBoxTeamSize.Text), int.Parse(comboBoxAgeFrom.Text),
                 int.Parse(comboBoxAgeTo.Text), gender, fromHometown);
 
-            isTeamBuilt = m_TeamManager.BuildTeam(teamSettings);
+            List<ITeamBuildingStrategy> strategies = new List<ITeamBuildingStrategy>();
+
+            if (teamSettings.AgeFrom != null && teamSettings.AgeTo != null)
+            {
+                strategies.Add(new AgeStrategy());
+            }
+
+            if (teamSettings.Gender != null)
+            {
+                strategies.Add(new GenderStrategy());
+            }
+
+            if (teamSettings.FromHometown != null)
+            {
+                strategies.Add(new HometownStrategy());
+            }
+
+            isTeamBuilt = m_TeamManager.BuildTeam(teamSettings, strategies);
 
             return isTeamBuilt;
         }
 
         private void presentTeamInfo(string i_TeamName)
         {
-            User teamManager = m_TeamManager.GetTeamManager(i_TeamName);
+            ProxyUser teamManager = m_TeamManager.GetTeamManager(i_TeamName);
             int ageFrom = m_TeamManager.GetAgeFrom(i_TeamName);
             int ageTo = m_TeamManager.GetAgeTo(i_TeamName);
             Genders gender = m_TeamManager.GetGender(i_TeamName);
@@ -611,7 +628,7 @@ Birthday: {3} ({4} years old).", name, gender, hometownName, birthDay, age.ToStr
         {
             if (listBoxTeamMembers.SelectedIndex > -1)
             {
-                User teamMember = listBoxTeamMembers.SelectedItem as User;
+                ProxyUser teamMember = listBoxTeamMembers.SelectedItem as ProxyUser;
 
                 m_TeamManager.RemoveTeamMember(m_TeamManager.SelectedTeamName, teamMember);
 

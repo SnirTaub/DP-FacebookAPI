@@ -9,7 +9,7 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
 {
     class GenderStrategy : ITeamBuildingStrategy
     {
-        public bool IsValidTeamMember(User i_PotentialTeamMember, TeamSettings i_TeamSettings)
+        public bool IsValidTeamMember(ProxyUser i_PotentialTeamMember, TeamSettings i_TeamSettings)
         {
             return i_TeamSettings.Gender == null ||
                    !i_TeamSettings.Gender.Gender.HasValue ||

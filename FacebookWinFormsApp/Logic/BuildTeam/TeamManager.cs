@@ -74,14 +74,14 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
             }
         }
 
-        public FacebookObjectCollection<User> GetTeamMembers(string i_TeamName)
+        public FacebookObjectCollection<ProxyUser> GetTeamMembers(string i_TeamName)
         {
             Team team = getTeam(i_TeamName);
 
             return team.TeamMembers;
         }
 
-        public void RemoveTeamMember(string i_TeamName, User i_TeamMember)
+        public void RemoveTeamMember(string i_TeamName, ProxyUser i_TeamMember)
         {
             Team team = getTeam(i_TeamName);
 
@@ -114,7 +114,7 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
             return team.AgeTo;
         }
 
-        public User GetTeamManager(string i_TeamName = null)
+        public ProxyUser GetTeamManager(string i_TeamName = null)
         {
             Team team = getTeam(i_TeamName);
 

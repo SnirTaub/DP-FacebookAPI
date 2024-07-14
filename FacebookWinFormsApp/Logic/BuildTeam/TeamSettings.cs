@@ -10,7 +10,7 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
 {
     public class TeamSettings
     {
-        public User TeamManager { get; set; }
+        public ProxyUser TeamManager { get; set; }
         public string TeamName { get; set; }
         public string TeamPurpose { get; set; }
         public int TeamSize { get; set; }
@@ -19,7 +19,7 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
         public bool FromHometown { get; set; }
         public Genders Gender { get; set; }
 
-        public TeamSettings(User i_TeamManager, string i_TeamName, string i_TeamPurpose, int i_TeamSize, int i_AgeFrom, int i_AgeTo, Genders i_Gender, bool i_FromHometown)
+        public TeamSettings(ProxyUser i_TeamManager, string i_TeamName, string i_TeamPurpose, int i_TeamSize, int i_AgeFrom, int i_AgeTo, Genders i_Gender, bool i_FromHometown)
         {
             TeamManager = i_TeamManager;
             TeamName = i_TeamName;

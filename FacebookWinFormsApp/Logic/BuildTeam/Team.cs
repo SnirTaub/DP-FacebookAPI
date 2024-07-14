@@ -85,7 +85,7 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
             }
         }
 
-        internal User TeamManager
+        internal ProxyUser TeamManager
         {
             get
             {
@@ -97,29 +97,29 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
         {
             Team team = new Team(i_TeamSettings, i_Strategies);
 
-            FacebookObjectCollection<User> potentialTeamMembers = team.fetchAllFriends();
+            FacebookObjectCollection<ProxyUser> potentialTeamMembers = team.fetchAllFriends();
             team.filterTeamMembers(potentialTeamMembers, i_TeamSettings);
 
             return team;
         }
 
-        public void RemoveTeamMember(User i_TeamMember)
+        public void RemoveTeamMember(ProxyUser i_TeamMember)
         {
             r_TeamMembers.Remove(i_TeamMember);
         }
 
-        private FacebookObjectCollection<User> fetchAllFriends()
+        private FacebookObjectCollection<ProxyUser> fetchAllFriends()
         {
-            FacebookObjectCollection<User> friends = m_TeamSettings.TeamManager.Friends;
+            FacebookObjectCollection<ProxyUser> friends = m_TeamSettings.TeamManager.Friends;
 
             return friends;
         }
 
-        private void filterTeamMembers(FacebookObjectCollection<User> i_PotentialTeamMembers, TeamSettings i_TeamSettings) // changed
+        private void filterTeamMembers(FacebookObjectCollection<ProxyUser> i_PotentialTeamMembers, TeamSettings i_TeamSettings) // changed
         {
             int size = 0;
 
-            foreach (User potentialTeamMember in i_PotentialTeamMembers)
+            foreach (ProxyUser potentialTeamMember in i_PotentialTeamMembers)
             {
                 if (size < i_TeamSettings.TeamSize &&
                     isValidTeamMember(potentialTeamMember))
@@ -134,7 +134,7 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
             }
         }
 
-        private bool isValidTeamMember(User i_PotentialTeamMember) // changed
+        private bool isValidTeamMember(ProxyUser i_PotentialTeamMember) // changed
         {
             bool isValidTeamMember = true;
 
@@ -149,41 +149,5 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
 
             return isValidTeamMember;
         }
-
-        /*private bool isValidTeamMember(User i_PotentialTeamMember, int i_AgeFrom, int i_AgeTo, Genders i_Gender, bool i_FromHometown)
-        {
-            bool isValidLocation = true;
-
-            if (i_FromHometown)
-            {
-                isValidLocation = isFromHometown(i_PotentialTeamMember);
-            }
-
-            return isRequiredGender(i_PotentialTeamMember, i_Gender) &&
-                isRequiredAge(i_PotentialTeamMember, i_AgeFrom, i_AgeTo) &&
-                isValidLocation;
-        }
-
-        private bool isRequiredGender(User i_PotentialTeamMember, Genders i_Gender)
-        {
-            return i_Gender == null ||
-                !i_Gender.Gender.HasValue ||
-                i_PotentialTeamMember.Gender.HasValue && i_PotentialTeamMember.Gender.Value == i_Gender.Gender.Value;
-        }
-
-        private bool isRequiredAge(User i_PotentialTeamMember, int i_AgeFrom, int i_AgeTo)
-        {
-            int ageFrom = i_AgeFrom <= i_AgeTo ? i_AgeFrom : i_AgeTo;
-            int ageTo = i_AgeTo > i_AgeFrom ? i_AgeTo : i_AgeFrom;
-
-            int potentialTeamMemberAge = AgeCalculator.CalculateAgeFromString(i_PotentialTeamMember.Birthday);
-
-            return AgeCalculator.IsInRange(ageFrom, ageTo, potentialTeamMemberAge);
-        }
-
-        private bool isFromHometown(User i_PotentialTeamMember)
-        {
-            return m_TeamSettings.TeamManager.Hometown == i_PotentialTeamMember.Hometown;
-        }*/
     }
 }

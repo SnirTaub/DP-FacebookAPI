@@ -91,7 +91,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Logic\AgeCalculator.cs" />
+    <Compile Include="Logic\BuildTeam\AgeStrategy.cs" />
     <Compile Include="Logic\BuildTeam\Genders.cs" />
+    <Compile Include="Logic\BuildTeam\GenderStrategy.cs" />
+    <Compile Include="Logic\BuildTeam\HometownStrategy.cs" />
+    <Compile Include="Logic\BuildTeam\ITeamBuildingStrategy.cs" />
     <Compile Include="Logic\ProxyUser.cs" />
     <Compile Include="Logic\ScheduledPost\ePrivacy.cs" />
     <Compile Include="Logic\ScheduledPost\ScheduledPost.cs" />

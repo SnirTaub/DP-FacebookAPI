@@ -2,7 +2,7 @@
 
 namespace BasicFacebookFeatures.Logic
 {
-    class ProxyUser
+    public class ProxyUser
     {
         private readonly User r_LoggedInUser;
 
@@ -84,6 +84,14 @@ namespace BasicFacebookFeatures.Logic
             set
             {
                 r_LoggedInUser.Birthday = value;
+            }
+        }
+
+        public FacebookObjectCollection<User> Friends
+        {
+            get
+            {
+                return r_LoggedInUser.Friends;
             }
         }
 
