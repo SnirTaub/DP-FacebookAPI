@@ -50,7 +50,7 @@ namespace BasicFacebookFeatures.Logic.ScheduledPost
 
         internal IList<ScheduledPost> GetPublishedScheduledPostsAsList()
         {
-            return r_Posts.Values.Where(post => !post.IsPosted).ToList();
+            return r_Posts.Values.Where(post => post.IsPosted).ToList();
         }
 
         internal void EditScheduledPost(int i_PostId, string i_PostBody, ePrivacyTypes i_Privacy)

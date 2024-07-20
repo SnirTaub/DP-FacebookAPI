@@ -10,18 +10,18 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
 {
     internal class Team
     {
-        private readonly FacebookObjectCollection<User> r_TeamMembers;
-        private readonly List<ITeamBuildingStrategy> r_Strategies; // changed
+        private readonly FacebookObjectCollection<ProxyUser> r_TeamMembers;
+        private readonly List<ITeamBuildingStrategy> r_Strategies;
         private TeamSettings m_TeamSettings;
 
-        private Team(TeamSettings i_TeamSettings, List<ITeamBuildingStrategy> i_Strategies) // changed
+        private Team(TeamSettings i_TeamSettings, List<ITeamBuildingStrategy> i_Strategies)
         {
-            r_TeamMembers = new FacebookObjectCollection<User>();
+            r_TeamMembers = new FacebookObjectCollection<ProxyUser>();
             m_TeamSettings = i_TeamSettings;
             r_Strategies = i_Strategies;
         }
 
-        public FacebookObjectCollection<User> TeamMembers
+        public FacebookObjectCollection<ProxyUser> TeamMembers
         {
             get
             {
@@ -93,7 +93,7 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
             }
         }
 
-        internal static Team BuildTeam(TeamSettings i_TeamSettings, List<ITeamBuildingStrategy> i_Strategies) // changed
+        internal static Team BuildTeam(TeamSettings i_TeamSettings, List<ITeamBuildingStrategy> i_Strategies)
         {
             Team team = new Team(i_TeamSettings, i_Strategies);
 
@@ -115,7 +115,7 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
             return friends;
         }
 
-        private void filterTeamMembers(FacebookObjectCollection<ProxyUser> i_PotentialTeamMembers, TeamSettings i_TeamSettings) // changed
+        private void filterTeamMembers(FacebookObjectCollection<ProxyUser> i_PotentialTeamMembers, TeamSettings i_TeamSettings)
         {
             int size = 0;
 
@@ -134,7 +134,7 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
             }
         }
 
-        private bool isValidTeamMember(ProxyUser i_PotentialTeamMember) // changed
+        private bool isValidTeamMember(ProxyUser i_PotentialTeamMember)
         {
             bool isValidTeamMember = true;
 

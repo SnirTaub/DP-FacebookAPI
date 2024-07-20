@@ -52,7 +52,7 @@ namespace BasicFacebookFeatures.Logic.BuildTeam
             }
         }
 
-        public bool BuildTeam(TeamSettings i_TeamSettings, List<ITeamBuildingStrategy> i_Strategies) // changed
+        public bool BuildTeam(TeamSettings i_TeamSettings, List<ITeamBuildingStrategy> i_Strategies)
         {
             bool isTeamBuilt = false;
 

@@ -95,22 +95,30 @@ namespace BasicFacebookFeatures
         {
             listBoxAlbums.Invoke(new Action(() => listBoxAlbums.Items.Clear()));
             listBoxAlbums.Invoke(new Action(() => listBoxAlbums.DisplayMember = Texts.Name));
-            m_Albums = m_LoggedInUser.Albums;
-            foreach (Album album in m_Albums)
+            // Currently facebook disabled the option to fetch albums
+            try
             {
-                if (album.Name != null)
+                m_Albums = m_LoggedInUser.Albums;
+                foreach (Album album in m_Albums)
                 {
-                    listBoxAlbums.Invoke(new Action(() => listBoxAlbums.Items.Add(album)));
-                }
-                else
-                {
-                    listBoxAlbums.Invoke(new Action(() => listBoxAlbums.Items.Add("dummy album")));
-                }
+                    if (album.Name != null)
+                    {
+                        listBoxAlbums.Invoke(new Action(() => listBoxAlbums.Items.Add(album)));
+                    }
+                    else
+                    {
+                        listBoxAlbums.Invoke(new Action(() => listBoxAlbums.Items.Add("dummy album")));
+                    }
 
-                if (listBoxAlbums.Items.Count == 25)
-                {
-                    break;
+                    if (listBoxAlbums.Items.Count == 25)
+                    {
+                        break;
+                    }
                 }
+            }
+            catch
+            {
+                listBoxAlbums.Invoke(new Action(() => listBoxAlbums.Items.Add("dummy album")));
             }
         }
 
@@ -187,13 +195,20 @@ namespace BasicFacebookFeatures
         {
             Album selectedAlbum;
 
-            if (listBoxAlbums.SelectedItems.Count == 1)
+            try
             {
-                selectedAlbum = listBoxAlbums.SelectedItem as Album;
-                if (selectedAlbum.PictureAlbumURL != null)
+                if (listBoxAlbums.SelectedItems.Count == 1)
                 {
-                    selectedAlbumCover.LoadAsync(selectedAlbum.PictureAlbumURL);
+                    selectedAlbum = listBoxAlbums.SelectedItem as Album;
+                    if (selectedAlbum != null && selectedAlbum.PictureAlbumURL != null)
+                    {
+                        selectedAlbumCover.LoadAsync(selectedAlbum.PictureAlbumURL);
+                    }
                 }
+            }
+            catch
+            {
+                // Currently Facebook disabled the option to fetch albums
             }
         }
 
@@ -407,7 +422,7 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private bool buildTeam() // changed
+        private bool buildTeam()
         {
             bool isTeamBuilt;
             bool fromHometown = checkBoxNearMe.Checked;
@@ -458,11 +473,6 @@ namespace BasicFacebookFeatures
 
             listBoxTeamMembers.DisplayMember = null;
 
-            /*if (listBoxTeamMembers.Items.Count > 0)
-            {
-                listBoxTeamMembers.Items.Clear();
-            }*/
-
             listBoxTeamMembers.DisplayMember = Texts.Name;
             listBoxTeamMembers.DataSource = m_TeamManager.GetTeamMembers(i_TeamName);
         }
@@ -484,7 +494,7 @@ namespace BasicFacebookFeatures
             listBoxTeams.DataSource = teams;
         }
 
-        private void presentTeamMemberInfo(User i_TeamMember)
+        private void presentTeamMemberInfo(ProxyUser i_TeamMember)
         {
             int age = AgeCalculator.CalculateAgeFromString(i_TeamMember.Birthday);
             string name = i_TeamMember.Name != null ? i_TeamMember.Name : "Missing name";
@@ -619,7 +629,7 @@ Birthday: {3} ({4} years old).", name, gender, hometownName, birthDay, age.ToStr
         {
             if (listBoxTeamMembers.SelectedIndex > -1)
             {
-                User selectedTeamMember = listBoxTeamMembers.SelectedItem as User;
+                ProxyUser selectedTeamMember = listBoxTeamMembers.SelectedItem as ProxyUser;
                 presentTeamMemberInfo(selectedTeamMember);
             }
         }

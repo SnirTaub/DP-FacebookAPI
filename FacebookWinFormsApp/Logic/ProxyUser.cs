@@ -1,4 +1,5 @@
 ﻿using FacebookWrapper.ObjectModel;
+using System.Drawing;
 
 namespace BasicFacebookFeatures.Logic
 {
@@ -53,6 +54,26 @@ namespace BasicFacebookFeatures.Logic
             }
         }
 
+        public Image ImageSmall
+        {
+            get
+            {
+                return r_LoggedInUser.ImageSmall;
+            }
+        }
+
+        public User.eGender? Gender
+        {
+            get
+            {
+                return r_LoggedInUser.Gender;
+            }
+            set
+            {
+                r_LoggedInUser.Gender = value;
+            }
+        }
+
         public string PictureNormalURL
         {
             get
@@ -87,11 +108,26 @@ namespace BasicFacebookFeatures.Logic
             }
         }
 
-        public FacebookObjectCollection<User> Friends
+        public FacebookObjectCollection<ProxyUser> Friends
         {
             get
             {
-                return r_LoggedInUser.Friends;
+                FacebookObjectCollection<ProxyUser> friends = new FacebookObjectCollection<ProxyUser>();
+
+                foreach (User friend in r_LoggedInUser.Friends)
+                {
+                    friends.Add(new ProxyUser(friend));
+                }
+
+                return friends;
+            }
+        }
+
+        public City Hometown
+        {
+            get
+            {
+                return r_LoggedInUser.Hometown;
             }
         }
 
@@ -105,6 +141,18 @@ namespace BasicFacebookFeatures.Logic
             set
             {
                 r_LoggedInUser.Location = value;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return r_LoggedInUser.Name;
+            }
+            set
+            {
+                r_LoggedInUser.Name = value;
             }
         }
 
@@ -134,10 +182,18 @@ namespace BasicFacebookFeatures.Logic
 
         private void addMockedAlbumsIfEmpty()
         {
-            // In case FB will throw authorization error, this is a dummy album
-            if (Albums is null || Albums.Count == 0)
+            try
             {
-                Albums = new FacebookObjectCollection<Album>() { new Album() };
+                // In case FB will throw authorization error, this is a dummy album
+                if (Albums is null || Albums.Count == 0)
+                {
+                    Albums = new FacebookObjectCollection<Album>() { new Album() };
+                }
+            }
+            catch
+            {
+                // Currently Facebook disabled the option to fetch albums
+                Albums = null;
             }
         }
 
